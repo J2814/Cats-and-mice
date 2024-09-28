@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
     public enum MovementType
     {
-        moveing, // постоянное движение 
+        moving, // постоянное движение 
         jerk    // рывок
     }
 
-    public MovementType type = MovementType.moveing;
+    public bool moveForward = true;
+    public MovementType type = MovementType.moving;
     public MovementPath myPath;
     public float speed = 1f;
-    public float maxDistance = .1f; // на какое расстояние должен подъехать объект к точке, чтобы понять что это точка.
+    public float maxDistance = .1f;
+    public int nextPointIndex = 0;
 
-    private IEnumerator<Transform> _pointInPath;  // проверка точек
+    private Transform _pointInPath;  // проверка точек
 
     // Start is called before the first frame update
     void Start()
@@ -26,40 +30,101 @@ public class FollowPath : MonoBehaviour
             return;  
         }
 
-        _pointInPath = myPath.GetNextPathPoint();
-        _pointInPath.MoveNext();           // получаем информацию о следующей точки в пути
+        nextPointIndex = -1;
+        NextMove();
 
-        if(_pointInPath.Current == null)
+        if(_pointInPath == null)
         {
             Debug.Log("Нужны точки");
             return;
         }
 
-        transform.position = _pointInPath.Current.position; // объект встает на стартовую точку пути
+        transform.position = _pointInPath.position; 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(_pointInPath == null || _pointInPath.Current == null)
+        Movement();
+
+    }
+
+    private void Movement()
+    {
+        if (_pointInPath == null)
         {
             return;
         }
 
-        if(type == MovementType.moveing)
+        if (type == MovementType.moving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _pointInPath.Current.position, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, _pointInPath.position, Time.deltaTime * speed);
         }
-        else if(type == MovementType.jerk)
+        else if (type == MovementType.jerk)
         {
-            transform.position = Vector3.Lerp(transform.position, _pointInPath.Current.position, Time.deltaTime * speed);
+            transform.position = Vector3.Lerp(transform.position, _pointInPath.position, Time.deltaTime * speed);
         }
 
-        float distannceSqure = (transform.position - _pointInPath.Current.position).sqrMagnitude;
+        float distannceSqure = (transform.position - _pointInPath.position).sqrMagnitude;
 
-        if(distannceSqure < maxDistance * maxDistance)  // достаточно близко к точки?
+        if (distannceSqure < maxDistance * maxDistance)
         {
-            _pointInPath.MoveNext();
+            NextMove();
         }
+    }
+
+    private void NextMove()
+    {
+        if (moveForward) 
+        {
+            if (_pointInPath == myPath.PathElements[myPath.PathElements.Length - 1])
+            {
+                Transition(myPath.ForwardPathStartPoint);
+                return;
+            }
+        }
+        else
+        {
+            if (_pointInPath == myPath.PathElements[0])
+            {
+                Transition(myPath.BackwardPathStartPoint);
+                return;
+            }
+        }
+
+        _pointInPath = GetNextPathPoint();
+    }
+
+    private void Transition(Transform newPathFirstPoint)
+    {
+        myPath = newPathFirstPoint.GetComponentInParent<MovementPath>();
+
+
+        if (myPath.PathElements[0] == newPathFirstPoint)
+        {
+            moveForward = true;
+            nextPointIndex = 0;
+        }
+        else
+        {
+            moveForward = false;
+            nextPointIndex = myPath.PathElements.Length - 1;
+        }
+
+
+        _pointInPath = newPathFirstPoint;
+    }
+
+    public Transform GetNextPathPoint()
+    {
+        if (moveForward == true)
+        {
+            nextPointIndex++;
+        }
+        else
+        {
+            nextPointIndex--;
+        }
+
+        return myPath.PathElements[nextPointIndex];
     }
 }
