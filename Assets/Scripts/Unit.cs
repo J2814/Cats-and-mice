@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour
     public float maxDistance = .1f;
     public int nextPointIndex = 0;
 
-    public Transform _pointInPath;  
+    public Transform CurrentPoint;  
 
     void Start()
     {
@@ -43,29 +43,30 @@ public class Unit : MonoBehaviour
 
     void Update()
     {
+        //update
         Movement();
         CheckForSwitch(); // check the keystroke to switch
     }
 
     private void Movement()
     {
-        if (_pointInPath == null)
+        if (CurrentPoint == null)
         {
             Debug.Log("AAAA");
-            Debug.Log(_pointInPath.name);
+            Debug.Log(CurrentPoint.name);
             return;
         }
 
         if (type == MovementType.moving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _pointInPath.position, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, CurrentPoint.position, Time.deltaTime * speed);
         }
         else if (type == MovementType.jerk)
         {
-            transform.position = Vector3.Lerp(transform.position, _pointInPath.position, Time.deltaTime * speed);
+            transform.position = Vector3.Lerp(transform.position, CurrentPoint.position, Time.deltaTime * speed);
         }
 
-        float distannceSqure = (transform.position - _pointInPath.position).sqrMagnitude;
+        float distannceSqure = (transform.position - CurrentPoint.position).sqrMagnitude;
 
         if (distannceSqure < maxDistance * maxDistance)
         {
@@ -77,7 +78,7 @@ public class Unit : MonoBehaviour
     {
         if (moveForward) 
         {
-            if (_pointInPath == myPath.PathElements[myPath.PathElements.Length - 1])
+            if (CurrentPoint == myPath.PathElements[myPath.PathElements.Length - 1])
             {
                 Transition(myPath.ForwardPathStartPoint);
                 return;
@@ -85,14 +86,14 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if (_pointInPath == myPath.PathElements[0])
+            if (CurrentPoint == myPath.PathElements[0])
             {
                 Transition(myPath.BackwardPathStartPoint);
                 return;
             }
         }
 
-        _pointInPath = GetNextPathPoint();
+        CurrentPoint = GetNextPathPoint();
     }
 
     
@@ -119,7 +120,7 @@ public class Unit : MonoBehaviour
             
         }
 
-        _pointInPath = newPathFirstPoint;
+        CurrentPoint = newPathFirstPoint;
     }
 
     public Transform GetNextPathPoint()
@@ -164,7 +165,7 @@ public class Unit : MonoBehaviour
 
             // Устанавливаем nextPointIndex в 0 и обновляем целевую точку
             nextPointIndex = 0; // Начинаем с первой точки нового пути
-            _pointInPath = myPath.PathElements[nextPointIndex]; // Устанавливаем новую целевую точку
+            CurrentPoint = myPath.PathElements[nextPointIndex]; // Устанавливаем новую целевую точку
 
             // Дополнительно, если хотите сохранить текущее положение, можно найти ближайшую точку на новом пути:
             float closestDistance = float.MaxValue;
@@ -184,7 +185,7 @@ public class Unit : MonoBehaviour
             // Устанавливаем позицию объекта на ближайшую точку на новом пути
             transform.position = myPath.PathElements[closestIndex].position;
             nextPointIndex = closestIndex; // Устанавливаем индекс на ближайшую точку
-            _pointInPath = myPath.PathElements[nextPointIndex]; // Устанавливаем целевую точку
+            CurrentPoint = myPath.PathElements[nextPointIndex]; // Устанавливаем целевую точку
         }
     }
 
