@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour
         //    return;  
         //}
 
-        //nextPointIndex = -1;///////////////////////////////////****
+        //nextPointIndex = -1;++++++++++++++++++++++++++++++++++++++
         //NextMove();
 
         //if(_pointInPath == null)
