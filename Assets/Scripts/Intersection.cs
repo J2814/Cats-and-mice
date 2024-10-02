@@ -28,4 +28,9 @@ public class Intersection : MonoBehaviour
     {
         return availablePaths[currentPathIndex].transform;
     }
+
+    public void OnUnitEnter(Unit unit)
+    {
+       
+    }
 }

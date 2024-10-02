@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour
         //    return;  
         //}
 
-        //nextPointIndex = -1;
+        //nextPointIndex = -1;///////////////////////////////////****
         //NextMove();
 
         //if(_pointInPath == null)
@@ -185,6 +185,17 @@ public class Unit : MonoBehaviour
             transform.position = myPath.PathElements[closestIndex].position;
             nextPointIndex = closestIndex; // Устанавливаем индекс на ближайшую точку
             _pointInPath = myPath.PathElements[nextPointIndex]; // Устанавливаем целевую точку
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Проверяем, столкнулись ли с объектом, на котором есть скрипт Intersection
+        Intersection intersection = other.GetComponent<Intersection>();
+        if (intersection != null)
+        {
+            // Вызываем метод у Intersection для дальнейшей обработки
+            intersection.OnUnitEnter(this);
         }
     }
 
