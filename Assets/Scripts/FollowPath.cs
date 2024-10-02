@@ -8,25 +8,24 @@ public class FollowPath : MonoBehaviour
 {
     public enum MovementType
     {
-        moving, // постоянное движение 
-        jerk    // рывок
+        moving, 
+        jerk    
     }
 
-    public bool moveForward = true;
+    public bool moveForward = true; 
     public MovementType type = MovementType.moving;
     public MovementPath myPath;
     public float speed = 1f;
     public float maxDistance = .1f;
     public int nextPointIndex = 0;
 
-    private Transform _pointInPath;  // проверка точек
+    private Transform _pointInPath;  
 
-    // Start is called before the first frame update
     void Start()
     {
-        if (myPath == null)  // проверка на наличие пути
+        if (myPath == null) 
         {
-            Debug.Log("Примени путь");
+            Debug.Log("Path is null");
             return;  
         }
 
@@ -35,7 +34,7 @@ public class FollowPath : MonoBehaviour
 
         if(_pointInPath == null)
         {
-            Debug.Log("Нужны точки");
+            Debug.Log("Points is null");
             return;
         }
 
@@ -45,7 +44,7 @@ public class FollowPath : MonoBehaviour
     void Update()
     {
         Movement();
-
+        CheckForSwitch(); // check the keystroke to switch
     }
 
     private void Movement()
@@ -127,4 +126,58 @@ public class FollowPath : MonoBehaviour
 
         return myPath.PathElements[nextPointIndex];
     }
+
+    private int switchPressCount = 0; // Счетчик нажатий клавиш
+
+    private void CheckForSwitch()
+    {
+        // Получаем все объекты типа Intersection
+        Intersection[] intersections = FindObjectsOfType<Intersection>();
+
+        foreach (var intersection in intersections)
+        {
+            if (Input.GetKeyDown(intersection.switchKey))
+            {
+                switchPressCount++; // Увеличиваем счетчик нажатий
+                SwitchPath(intersection.GetAvailablePaths());
+            }
+        }
+    }
+
+    private void SwitchPath(MovementPath[] newPaths)
+    {
+        if (newPaths.Length > 0)
+        {
+            // Вычисляем индекс следующего пути на основе счетчика нажатий
+            int nextPathIndex = switchPressCount % newPaths.Length; // Циклический выбор пути
+
+            myPath = newPaths[nextPathIndex]; // Переключаемся на путь по индексу
+
+            // Устанавливаем nextPointIndex в 0 и обновляем целевую точку
+            nextPointIndex = 0; // Начинаем с первой точки нового пути
+            _pointInPath = myPath.PathElements[nextPointIndex]; // Устанавливаем новую целевую точку
+
+            // Дополнительно, если хотите сохранить текущее положение, можно найти ближайшую точку на новом пути:
+            float closestDistance = float.MaxValue;
+            int closestIndex = 0;
+
+            // Ищем ближайшую точку на новом пути
+            for (int i = 0; i < myPath.PathElements.Length; i++)
+            {
+                float distance = Vector3.Distance(transform.position, myPath.PathElements[i].position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestIndex = i;
+                }
+            }
+
+            // Устанавливаем позицию объекта на ближайшую точку на новом пути
+            transform.position = myPath.PathElements[closestIndex].position;
+            nextPointIndex = closestIndex; // Устанавливаем индекс на ближайшую точку
+            _pointInPath = myPath.PathElements[nextPointIndex]; // Устанавливаем целевую точку
+        }
+    }
+
+
 }
