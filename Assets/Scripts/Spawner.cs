@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Transform[] SpawnPoints;
+    [SerializeField]
+    private GameObject UnitPrefab;
+
+
+
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SpawnUnit(GetRandomSpawnPoint());
+        }
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private Transform GetRandomSpawnPoint()
     {
+        if (SpawnPoints == null)
+        {
+            return null;
+        }
+
+        int index = Random.Range(0, SpawnPoints.Length);
+
+        return SpawnPoints[index];
+    }
+
+    private void SpawnUnit(Transform sp)
+    {
+        if (sp == null)
+        {
+            Debug.Log("Spawner assigned null spawn point");
+            return;
+        }
+
+        Instantiate(UnitPrefab);
+
+        
+        UnitPrefab.GetComponent<Unit>().Transition(sp);
         
     }
 }

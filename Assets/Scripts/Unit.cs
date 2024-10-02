@@ -19,26 +19,26 @@ public class Unit : MonoBehaviour
     public float maxDistance = .1f;
     public int nextPointIndex = 0;
 
-    private Transform _pointInPath;  
+    public Transform _pointInPath;  
 
     void Start()
     {
-        if (myPath == null) 
-        {
-            Debug.Log("Path is null");
-            return;  
-        }
+        //if (myPath == null) 
+        //{
+        //    Debug.Log("Path is null");
+        //    return;  
+        //}
 
-        nextPointIndex = -1;
-        NextMove();
+        //nextPointIndex = -1;
+        //NextMove();
 
-        if(_pointInPath == null)
-        {
-            Debug.Log("Points is null");
-            return;
-        }
+        //if(_pointInPath == null)
+        //{
+        //    Debug.Log("Points is null");
+        //    return;
+        //}
 
-        transform.position = _pointInPath.position; 
+        //transform.position = _pointInPath.position; 
     }
 
     void Update()
@@ -51,6 +51,8 @@ public class Unit : MonoBehaviour
     {
         if (_pointInPath == null)
         {
+            Debug.Log("AAAA");
+            Debug.Log(_pointInPath.name);
             return;
         }
 
@@ -71,13 +73,12 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void NextMove()
+    public void NextMove()
     {
         if (moveForward) 
         {
             if (_pointInPath == myPath.PathElements[myPath.PathElements.Length - 1])
             {
-
                 Transition(myPath.ForwardPathStartPoint);
                 return;
             }
@@ -96,9 +97,14 @@ public class Unit : MonoBehaviour
 
     
 
-    private void Transition(Transform newPathFirstPoint)
+    public void Transition(Transform newPathFirstPoint)
     {
         myPath = newPathFirstPoint.GetComponentInParent<MovementPath>();
+        if (myPath == null)
+        {
+            Debug.Log("Recieved point has no MovementPath");
+            return;
+        }
 
 
         if (myPath.PathElements[0] == newPathFirstPoint)
@@ -110,8 +116,8 @@ public class Unit : MonoBehaviour
         {
             moveForward = false;
             nextPointIndex = myPath.PathElements.Length - 1;
+            
         }
-
 
         _pointInPath = newPathFirstPoint;
     }
