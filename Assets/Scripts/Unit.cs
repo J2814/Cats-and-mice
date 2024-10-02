@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FollowPath : MonoBehaviour
+public class Unit : MonoBehaviour
 {
     public enum MovementType
     {
@@ -77,6 +77,7 @@ public class FollowPath : MonoBehaviour
         {
             if (_pointInPath == myPath.PathElements[myPath.PathElements.Length - 1])
             {
+
                 Transition(myPath.ForwardPathStartPoint);
                 return;
             }
@@ -92,6 +93,8 @@ public class FollowPath : MonoBehaviour
 
         _pointInPath = GetNextPathPoint();
     }
+
+    
 
     private void Transition(Transform newPathFirstPoint)
     {
