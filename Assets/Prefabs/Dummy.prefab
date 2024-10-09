@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4973982773055399295}
   - component: {fileID: 6809927521026867942}
   - component: {fileID: 4978642793196928807}
+  - component: {fileID: 3349540266777890653}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -118,9 +119,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8bd31df955f004bac76d40d5fd0ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForward: 0
-  type: 0
+--- !u!114 &3349540266777890653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065459703906632848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873bbdd8e1d91b143bfe941dec0ef2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   myPath: {fileID: 0}
-  speed: 4
-  maxDistance: 0.1
-  nextPointIndex: 3
+  CurrentPoint: {fileID: 0}
+  Speed: 3
+  MaxDistance: 0.1

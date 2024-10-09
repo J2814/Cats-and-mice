@@ -39,10 +39,12 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        Instantiate(UnitPrefab);
+        GameObject unit = Instantiate(UnitPrefab);
 
-
-       // UnitPrefab.GetComponent<Unit>().Transition(sp);
-
+        if (unit.GetComponent<MovementController>() != null)
+        {
+            unit.GetComponent<MovementController>().Transition(sp);
+            unit.transform.position = sp.transform.position;
+        }
     }
 }

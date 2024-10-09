@@ -2,19 +2,12 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public MovementPath myPath;
-    public float speed = 1f;
-    public float maxDistance = .1f;
     private MovementController movementController;
+    public bool IsCat;
 
     void Start()
     {
-        movementController = new MovementController(this, myPath, true, speed, maxDistance);
-    }
-
-    void Update()
-    {
-        movementController.UpdateMovement();
+        movementController = GetComponent<MovementController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,7 +15,7 @@ public class Unit : MonoBehaviour
         Intersection intersection = other.GetComponent<Intersection>();
         if (intersection != null)
         {
-            intersection.OnUnitEnter(this, myPath, movementController.CurrentPoint);
+            intersection.OnUnitEnter(this, movementController.myPath, movementController.CurrentPoint);
         }
     }
 

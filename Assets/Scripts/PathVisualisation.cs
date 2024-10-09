@@ -6,7 +6,6 @@ public class PathVisualisation : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     private MovementPath path;
-    // Start is called before the first frame update
     void Start()
     {
         path = GetComponent<MovementPath>();

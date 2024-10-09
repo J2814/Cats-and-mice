@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    private Unit _unit;
-    private MovementPath _myPath;
+    public MovementPath myPath;
     public Transform CurrentPoint;
-    private bool _moveForward;
-    private int _nextPointIndex;
-    private float _speed;
-    private float _maxDistance;
+    private bool moveForward;
+    private int nextPointIndex;
+    public float Speed;
+    public float MaxDistance = 0.1f;
 
-    public MovementController(Unit unit, MovementPath path, bool moveForward, float speed,  float maxDistance)
+    
+    private void Update()
     {
-        _unit = unit;
-        _myPath = path;
-        _moveForward = moveForward;
-        _speed = speed;
-        _maxDistance = maxDistance;
-
-        CurrentPoint = path.PathElements[0];
-        _nextPointIndex = 0;
+        UpdateMovement();
     }
-
     public void UpdateMovement()
     {
         if(CurrentPoint == null)
@@ -32,11 +24,11 @@ public class MovementController : MonoBehaviour
             return;
         }
 
-        _unit.transform.position = Vector3.MoveTowards(_unit.transform.position, CurrentPoint.position, Time.deltaTime * _speed);
+        transform.position = Vector3.MoveTowards(transform.position, CurrentPoint.position, Time.deltaTime * Speed);
 
-        float distanceSquared = (_unit.transform.position - CurrentPoint.position).sqrMagnitude;
+        float distanceSquared = (transform.position - CurrentPoint.position).sqrMagnitude;
 
-        if (distanceSquared < _maxDistance * _maxDistance)
+        if (distanceSquared < MaxDistance * MaxDistance)
         {
             NextMove();
         }
@@ -44,19 +36,19 @@ public class MovementController : MonoBehaviour
 
     public void NextMove()
     {
-        if (_moveForward)
+        if (moveForward)
         {
-            if (CurrentPoint == _myPath.PathElements[_myPath.PathElements.Length - 1])
+            if (CurrentPoint == myPath.PathElements[myPath.PathElements.Length - 1])
             {
-                Transition(_myPath.ForwardPathStartPoint);
+                Transition(myPath.ForwardPathStartPoint);
                 return;
             }
         }
         else
         {
-            if (CurrentPoint == _myPath.PathElements[0])
+            if (CurrentPoint == myPath.PathElements[0])
             {
-                Transition(_myPath.BackwardPathStartPoint);
+                Transition(myPath.BackwardPathStartPoint);
                 return;
             }
         }
@@ -66,23 +58,23 @@ public class MovementController : MonoBehaviour
 
     public void Transition(Transform newPathFirstPoint)
     {
-        _myPath = newPathFirstPoint.GetComponentInParent<MovementPath>();
-        if (_myPath == null)
+        myPath = newPathFirstPoint.GetComponentInParent<MovementPath>();
+        if (myPath == null)
         {
             Debug.Log("Recieved point has no MovementPath");
             return;
         }
 
 
-        if (_myPath.PathElements[0] == newPathFirstPoint)
+        if (myPath.PathElements[0] == newPathFirstPoint)
         {
-            _moveForward = true;
-            _nextPointIndex = 0;
+            moveForward = true;
+            nextPointIndex = 0;
         }
         else
         {
-            _moveForward = false;
-            _nextPointIndex = _myPath.PathElements.Length - 1;
+            moveForward = false;
+            nextPointIndex = myPath.PathElements.Length - 1;
 
         }
 
@@ -91,16 +83,16 @@ public class MovementController : MonoBehaviour
 
     private Transform GetNextPathPoint()
     {
-        if (_moveForward == true)
+        if (moveForward == true)
         {
-            _nextPointIndex++;
+            nextPointIndex++;
         }
         else
         {
-            _nextPointIndex--;
+            nextPointIndex--;
         }
 
-        return _myPath.PathElements[_nextPointIndex];
+        return myPath.PathElements[nextPointIndex];
     }
 
 
