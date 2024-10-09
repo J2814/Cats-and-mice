@@ -15,22 +15,32 @@ public class Intersection : MonoBehaviour
     {
         if (Input.GetKeyDown(switchKey))
         {
-            currentPathIndex++;
-
-            if (currentPathIndex >= availablePaths.Length - 1) 
-            {
-                currentPathIndex = 0;
-            }
+            SwitchCurrentPath();
         }
     }
 
-    public Transform CurrentPath()
+    private void SwitchCurrentPath()
     {
-        return availablePaths[currentPathIndex].transform;
+        currentPathIndex++;
+
+        if (currentPathIndex >= availablePaths.Length - 1)
+        {
+            currentPathIndex = 0;
+        }
+
+        for (int i = 0; i < availablePaths.Length; i++) 
+        {
+            if (i == currentPathIndex)
+            {
+                availablePaths[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                availablePaths[i].gameObject.SetActive(false);
+            }
+            
+        }
     }
 
-    public void OnUnitEnter(Unit unit, MovementPath incomingPath, Transform currentPoint)
-    {
-       
-    }
+
 }
