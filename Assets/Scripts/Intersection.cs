@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class Intersection : MonoBehaviour
 {
-    public MovementPath[] availablePaths; // Доступные пути из перекрестка
+    public MovementPath[] availablePaths; 
     private int currentPathIndex;
-    public KeyCode switchKey; // Клавиша для переключения на этот перекресток
-
-    // Метод для получения доступных путей
+    public KeyCode switchKey;
+    
     public MovementPath[] GetAvailablePaths()
     {
         return availablePaths;
@@ -16,11 +15,12 @@ public class Intersection : MonoBehaviour
     {
         if (Input.GetKeyDown(switchKey))
         {
+            currentPathIndex++;
+
             if (currentPathIndex >= availablePaths.Length - 1) 
             {
-                currentPathIndex++;
+                currentPathIndex = 0;
             }
-            
         }
     }
 
@@ -29,7 +29,7 @@ public class Intersection : MonoBehaviour
         return availablePaths[currentPathIndex].transform;
     }
 
-    public void OnUnitEnter(Unit unit)
+    public void OnUnitEnter(Unit unit, MovementPath incomingPath, Transform currentPoint)
     {
        
     }

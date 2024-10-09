@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
         {
             SpawnUnit(GetRandomSpawnPoint());
         }
-        
+
     }
     private Transform GetRandomSpawnPoint()
     {
@@ -41,8 +41,8 @@ public class Spawner : MonoBehaviour
 
         Instantiate(UnitPrefab);
 
-        
-        UnitPrefab.GetComponent<Unit>().Transition(sp);
-        
+
+       // UnitPrefab.GetComponent<Unit>().Transition(sp);
+
     }
 }
