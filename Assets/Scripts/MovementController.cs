@@ -40,7 +40,7 @@ public class MovementController : MonoBehaviour
         {
             if (CurrentPoint == myPath.PathElements[myPath.PathElements.Length - 1])
             {
-                Transition(myPath.ForwardPathStartPoint);
+                Transition(myPath.ForwardConnectedPath, true);
                 return;
             }
         }
@@ -48,7 +48,7 @@ public class MovementController : MonoBehaviour
         {
             if (CurrentPoint == myPath.PathElements[0])
             {
-                Transition(myPath.BackwardPathStartPoint);
+                Transition(myPath.BackwardConnectedPath, false);
                 return;
             }
         }
@@ -79,6 +79,24 @@ public class MovementController : MonoBehaviour
         }
 
         CurrentPoint = newPathFirstPoint;
+    }
+
+    public void Transition(MovementPath mp, bool forward)
+    {
+        myPath = mp;
+        if (forward)
+        {
+            moveForward = true;
+            nextPointIndex = 0;
+            CurrentPoint = mp.PathElements[0];
+        }
+        else
+        {
+            moveForward = false;
+            nextPointIndex = mp.PathElements.Length - 1;
+            CurrentPoint = mp.PathElements[mp.PathElements.Length - 1];
+        }
+        
     }
 
     private Transform GetNextPathPoint()

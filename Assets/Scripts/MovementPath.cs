@@ -7,8 +7,8 @@ public class MovementPath : MonoBehaviour
      
     public Transform[] PathElements;
 
-    public Transform ForwardPathStartPoint;
-    public Transform BackwardPathStartPoint;
+    public MovementPath ForwardConnectedPath;
+    public MovementPath BackwardConnectedPath;
 
     public void OnDrawGizmos()        
     {
@@ -20,7 +20,11 @@ public class MovementPath : MonoBehaviour
         }
     }
    
-
+    public void ForceConnectionToSelf()
+    {
+        ForwardConnectedPath.BackwardConnectedPath = this;
+        BackwardConnectedPath.ForwardConnectedPath = this;
+    }
 
 }
 

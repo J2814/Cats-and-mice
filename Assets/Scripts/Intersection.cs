@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class Intersection : MonoBehaviour
 {
-    public MovementPath[] availablePaths; 
-    private int currentPathIndex;
+    public MovementPath[] availablePaths;
+    [SerializeField]
+    private int currentPathIndex = 0;
     public KeyCode switchKey;
     
     public MovementPath[] GetAvailablePaths()
     {
         return availablePaths;
+    }
+    private void Start()
+    {
+        EnableCurrentPath();
     }
 
     private void Update()
@@ -23,24 +28,27 @@ public class Intersection : MonoBehaviour
     {
         currentPathIndex++;
 
-        if (currentPathIndex >= availablePaths.Length - 1)
+        if (currentPathIndex >= availablePaths.Length)
         {
             currentPathIndex = 0;
         }
 
-        for (int i = 0; i < availablePaths.Length; i++) 
+        EnableCurrentPath();
+    }
+
+    private void EnableCurrentPath()
+    {
+        for (int i = 0; i < availablePaths.Length; i++)
         {
             if (i == currentPathIndex)
             {
                 availablePaths[i].gameObject.SetActive(true);
+                availablePaths[i].ForceConnectionToSelf();
             }
             else
             {
                 availablePaths[i].gameObject.SetActive(false);
             }
-            
         }
     }
-
-
 }

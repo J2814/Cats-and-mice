@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8bd31df955f004bac76d40d5fd0ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsCat: 0
 --- !u!114 &3349540266777890653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,5 +134,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPath: {fileID: 0}
   CurrentPoint: {fileID: 0}
-  Speed: 3
+  Speed: 6
   MaxDistance: 0.1
