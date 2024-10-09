@@ -40,7 +40,11 @@ public class MovementController : MonoBehaviour
         {
             if (CurrentPoint == myPath.PathElements[myPath.PathElements.Length - 1])
             {
-                Transition(myPath.ForwardConnectedPath, true);
+                if (myPath.ForwardConnectedPath.isActiveAndEnabled)
+                {
+                    Transition(myPath.ForwardConnectedPath, true);
+                }
+                
                 return;
             }
         }
@@ -48,7 +52,11 @@ public class MovementController : MonoBehaviour
         {
             if (CurrentPoint == myPath.PathElements[0])
             {
-                Transition(myPath.BackwardConnectedPath, false);
+                if (myPath.BackwardConnectedPath.isActiveAndEnabled)
+                {
+                    Transition(myPath.BackwardConnectedPath, false);
+                }
+                
                 return;
             }
         }
