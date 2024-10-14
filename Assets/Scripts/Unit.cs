@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -23,17 +24,7 @@ public class Unit : MonoBehaviour
         {
             Die();
         }
-        else if (this.CompareTag("Mouse") && otherUnit.CompareTag("Mouse"))
-        {
-            Ignore(otherUnit);
-        }
     }
-
-    private void Ignore(Unit otherUnit)
-    {
-        Physics.IgnoreCollision(this.GetComponent<Collider>(), otherUnit.GetComponent<Collider>());
-    }
-
     private void Die()
     {
         Destroy(gameObject);
