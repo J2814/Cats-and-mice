@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 6809927521026867942}
   - component: {fileID: 4978642793196928807}
   - component: {fileID: 3349540266777890653}
+  - component: {fileID: 1150608721540111085}
   m_Layer: 0
   m_Name: Dummy
-  m_TagString: Untagged
+  m_TagString: Mouse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +102,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -119,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8bd31df955f004bac76d40d5fd0ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsCat: 0
 --- !u!114 &3349540266777890653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +136,30 @@ MonoBehaviour:
   CurrentPoint: {fileID: 0}
   Speed: 6
   MaxDistance: 0.1
+--- !u!54 &1150608721540111085
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065459703906632848}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
