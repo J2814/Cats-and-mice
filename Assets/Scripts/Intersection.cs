@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Intersection : MonoBehaviour
 {
-    public MovementPath[] availablePaths;
+    public IntersectionPath[] availablePaths;
     [SerializeField]
     private int currentPathIndex = 0;
     public KeyCode switchKey;

@@ -1,14 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementPath : MonoBehaviour
 { 
-     
     public Transform[] PathElements;
 
-    public MovementPath ForwardConnectedPath;
-    public MovementPath BackwardConnectedPath;
+    public enum ConnectionTypeEnum
+    {
+        EndToStart,
+        StartToEnd,
+        StartToStart,
+        EndToEnd
+    }
+    [Serializable]
+    public class Connection
+    {
+        public ConnectionTypeEnum ConnectionType;
+        public MovementPath path;
+
+    }
+    public List<Connection> Connections = new List<Connection>();
 
     public void OnDrawGizmos()        
     {
@@ -19,13 +32,6 @@ public class MovementPath : MonoBehaviour
             Gizmos.DrawLine(PathElements[i - 1].position, PathElements[i].position); 
         }
     }
-   
-    public void ForceConnectionToSelf()
-    {
-        ForwardConnectedPath.BackwardConnectedPath = this;
-        BackwardConnectedPath.ForwardConnectedPath = this;
-    }
-
 }
 
 

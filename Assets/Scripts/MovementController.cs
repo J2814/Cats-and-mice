@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
     public MovementPath myPath;
     public Transform CurrentPoint;
+    [SerializeField]
     private bool moveForward;
     private int nextPointIndex;
     public float Speed;
@@ -38,30 +40,34 @@ public class MovementController : MonoBehaviour
     {
         if (moveForward)
         {
-            if (CurrentPoint == myPath.PathElements[myPath.PathElements.Length - 1])
+            if (CurrentPoint != myPath.PathElements[myPath.PathElements.Length - 1]) { CurrentPoint = GetNextPathPoint(); return; }
+            foreach (MovementPath.Connection conn in myPath.Connections)
             {
-                if (myPath.ForwardConnectedPath.isActiveAndEnabled)
+                if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.EndToStart && conn.path != null && conn.path.isActiveAndEnabled)
                 {
-                    Transition(myPath.ForwardConnectedPath, true);
+                    Transition(conn.path, true);
                 }
-                
-                return;
+                if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.EndToEnd && conn.path != null && conn.path.isActiveAndEnabled)
+                {
+                    Transition(conn.path, false);
+                }
             }
         }
         else
         {
-            if (CurrentPoint == myPath.PathElements[0])
+            if (CurrentPoint != myPath.PathElements[0]) { CurrentPoint = GetNextPathPoint(); return; }
+            foreach (MovementPath.Connection conn in myPath.Connections)
             {
-                if (myPath.BackwardConnectedPath.isActiveAndEnabled)
+                if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.StartToEnd && conn.path != null && conn.path.isActiveAndEnabled)
                 {
-                    Transition(myPath.BackwardConnectedPath, false);
+                    Transition(conn.path, false);
                 }
-                
-                return;
+                if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.StartToStart && conn.path != null && conn.path.isActiveAndEnabled)
+                {
+                    Transition(conn.path, true);
+                }
             }
         }
-
-        CurrentPoint = GetNextPathPoint();
     }
 
     public void Transition(Transform newPathFirstPoint)
@@ -91,6 +97,7 @@ public class MovementController : MonoBehaviour
 
     public void Transition(MovementPath mp, bool forward)
     {
+        Debug.Log(mp.gameObject.name);
         myPath = mp;
         if (forward)
         {
