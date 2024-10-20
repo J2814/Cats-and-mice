@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class IntersectionPath : MovementPath
 {
     public void ForceConnectionToSelf()
@@ -12,42 +7,32 @@ public class IntersectionPath : MovementPath
             switch (conn.ConnectionType)
             {
                 case ConnectionTypeEnum.EndToStart:
-                    foreach (Connection c in conn.path.Connections)
-                    {
-                        if (c.ConnectionType == ConnectionTypeEnum.StartToEnd)
-                        {
-                            c.path = this; break;
-                        }
-                    }
+                    HandleConnection(conn, ConnectionTypeEnum.StartToEnd);
+                    break;
 
-                    break;
                 case ConnectionTypeEnum.StartToEnd:
-                    foreach (Connection c in conn.path.Connections)
-                    {
-                        if (c.ConnectionType == ConnectionTypeEnum.EndToStart)
-                        {
-                            c.path = this; break;
-                        }
-                    }
+                    HandleConnection(conn, ConnectionTypeEnum.EndToStart);
                     break;
+
                 case ConnectionTypeEnum.EndToEnd:
-                    foreach (Connection c in conn.path.Connections)
-                    {
-                        if (c.ConnectionType == ConnectionTypeEnum.EndToEnd)
-                        {
-                            c.path = this; break;
-                        }
-                    }
+                    HandleConnection(conn, ConnectionTypeEnum.EndToEnd);
                     break;
+
                 case ConnectionTypeEnum.StartToStart:
-                    foreach (Connection c in conn.path.Connections)
-                    {
-                        if (c.ConnectionType == ConnectionTypeEnum.StartToStart)
-                        {
-                            c.path = this; break;
-                        }
-                    }
+                    HandleConnection(conn, ConnectionTypeEnum.StartToStart);
                     break;
+            }
+        }
+    }
+
+    private void HandleConnection(Connection conn, ConnectionTypeEnum targetType)
+    {
+        foreach (Connection c in conn.path.Connections)
+        {
+            if (c.ConnectionType == targetType)
+            {
+                c.path = this;
+                break;
             }
         }
     }
