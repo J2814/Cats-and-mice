@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -18,7 +17,9 @@ public class Unit : MonoBehaviour
 
         if(this.CompareTag("Cat") && otherUnit.CompareTag("Cat"))
         {
-            Die();
+            //if (this.GetInstanceID() < otherUnit.GetInstanceID())
+            Die(); 
+           
         }
         else if (this.CompareTag("Mouse") && otherUnit.CompareTag("Cat"))
         {
