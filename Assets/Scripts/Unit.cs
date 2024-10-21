@@ -29,8 +29,6 @@ public class Unit : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
-
-        LevelSwitch.instance.SwitchLevel();
     }
 
 }
