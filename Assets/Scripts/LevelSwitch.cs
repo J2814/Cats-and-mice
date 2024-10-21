@@ -7,8 +7,22 @@ public class LevelSwitch : MonoBehaviour
 {
     public static LevelSwitch instance;
 
-    private List<int> levels = new List<int> { 0, 1, 2, 3, 4 };
+    private int sceneCount;
+    private List<int> levels;
+
     private int currentLevelIndex = 0;
+
+    private void Start()
+    {
+        sceneCount = SceneManager.sceneCountInBuildSettings;
+        levels = new List<int>();
+
+
+        for (int i = 0; i < sceneCount; i++)
+        {
+            levels.Add(i); 
+        }
+    }
 
     private void Awake()
     {
