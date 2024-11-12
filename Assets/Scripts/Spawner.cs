@@ -15,10 +15,16 @@ public class Spawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SpawnUnit(GetRandomSpawnPoint());
+            RandomSpawn();
         }
 
     }
+
+    internal void RandomSpawn()
+    {
+        SpawnUnit(GetRandomSpawnPoint());
+    }
+
     private Transform GetRandomSpawnPoint()
     {
         if (SpawnPoints == null)
