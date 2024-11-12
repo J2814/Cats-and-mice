@@ -11,6 +11,11 @@ public class Unit : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        if (collider.CompareTag("DeathTrap"))
+        {
+            Die();
+        }
+
         if (collider.gameObject.GetComponent<Unit>() == null) return;
 
         Unit otherUnit = collider.gameObject.GetComponent<Unit>();
@@ -28,6 +33,16 @@ public class Unit : MonoBehaviour
     }
     private void Die()
     {
+        if (this.CompareTag("Cat"))
+        {
+            LevelManager.CatDied?.Invoke();
+        }
+
+        if (this.CompareTag("Mouse"))
+        {
+            LevelManager.MouseDied?.Invoke();
+        }
+
         Destroy(gameObject);
     }
 

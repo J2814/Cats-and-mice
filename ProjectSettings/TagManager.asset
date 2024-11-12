@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cat
   - Mouse
+  - DeathTrap
   layers:
   - Default
   - TransparentFX

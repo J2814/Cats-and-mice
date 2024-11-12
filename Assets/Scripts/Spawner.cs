@@ -41,6 +41,11 @@ public class Spawner : MonoBehaviour
 
         GameObject unit = Instantiate(UnitPrefab);
 
+        if (unit.CompareTag("Cat"))
+        {
+            LevelManager.CatSpawned?.Invoke();
+        }
+
         if (unit.GetComponent<MovementController>() != null)
         {
             unit.GetComponent<MovementController>().Transition(sp);
