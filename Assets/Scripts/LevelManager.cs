@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     public static Action CatSpawned;
     public static Action Pause;
     public static Action EndLevel;
+
+
     public int CurrentSpawnedCats;
 
     private bool isPaused = false;

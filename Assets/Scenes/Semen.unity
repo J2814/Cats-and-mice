@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 208764148}
   - component: {fileID: 208764147}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: LevelCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5072,7 +5072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1843400314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6033,6 +6033,10 @@ PrefabInstance:
     - target: {fileID: 3513403706908656408, guid: b1bf9cc2ca7fe094682781c04fa5018e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516420388018363484, guid: b1bf9cc2ca7fe094682781c04fa5018e, type: 3}
+      propertyPath: m_Center.x
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 8048353147166559526, guid: b1bf9cc2ca7fe094682781c04fa5018e, type: 3}
       propertyPath: m_Name
