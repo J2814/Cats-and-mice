@@ -14,13 +14,20 @@ public class LevelManager : MonoBehaviour
     public static Action CatDied;
     public static Action MouseDied;
     public static Action CatSpawned;
+    public static Action Pause;
+    public static Action EndLevel;
     public int CurrentSpawnedCats;
+
+    private bool isPaused = false;
+
+    private bool LevelEnded = false;
 
     private void OnEnable()
     {
         CatDied += UpdateDeadCats;
         MouseDied += UpdateDeadMice;
         CatSpawned += UpdateSpawnedCats;
+        Pause += PauseGame;
     }
 
     private void OnDisable()
@@ -28,8 +35,12 @@ public class LevelManager : MonoBehaviour
         CatDied -= UpdateDeadCats;
         MouseDied -= UpdateDeadMice;
         CatSpawned -= UpdateSpawnedCats;
+        Pause -= PauseGame;
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) PauseGame(); Debug.Log("Pause");
+    }
     private void UpdateDeadCats()
     {
         CurrentNumberOfDeadCats++;
@@ -38,6 +49,8 @@ public class LevelManager : MonoBehaviour
         if (CurrentNumberOfDeadCats >= NumberOfDeadCatsToWin)
         {
             Debug.Log("Win");
+            UiManager.WinScreen?.Invoke();
+            EndLevel?.Invoke();
         }
     }
 
@@ -48,11 +61,26 @@ public class LevelManager : MonoBehaviour
         if (CurrentNumberOfDeadMice >= NumberOfDeadMiceToLoose)
         {
             Debug.Log("Loose");
+            UiManager.LooseScreen?.Invoke();
+            EndLevel?.Invoke();
         }
     }
 
     private void UpdateSpawnedCats()
     {
         CurrentSpawnedCats++;
+    }
+
+
+    private void PauseGame()
+    {
+        if (LevelEnded) return;
+
+        isPaused = !isPaused;
+
+        Time.timeScale = isPaused ? 0 : 1;
+
+
+        UiManager.PauseAction?.Invoke(isPaused);
     }
 }

@@ -10,8 +10,20 @@ public class AdaptiveSpawner : Spawner
     public float SpawnTime;
     private float currentSpawnTime;
 
+    private bool AllowSpawn = true;
+
     [SerializeField]
     private int MaxSpawnedCats;
+
+    private void OnEnable()
+    {
+        LevelManager.EndLevel += StopSpawning;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.EndLevel -= StopSpawning;
+    }
     void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
@@ -25,6 +37,8 @@ public class AdaptiveSpawner : Spawner
 
     private void TimedRandomSpawn()
     {
+        if (!AllowSpawn) return;
+
         currentSpawnTime -= Time.deltaTime;
         if (currentSpawnTime <= 0)
         {
@@ -36,5 +50,9 @@ public class AdaptiveSpawner : Spawner
         }
     }
 
+    private void StopSpawning()
+    {
+        AllowSpawn = false;
+    }
    
 }
