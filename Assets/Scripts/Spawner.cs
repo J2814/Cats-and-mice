@@ -52,6 +52,11 @@ public class Spawner : MonoBehaviour
             LevelManager.CatSpawned?.Invoke();
         }
 
+        if (unit.CompareTag("Mouse"))
+        {
+            LevelManager.MouseSpawned?.Invoke();
+        }
+
         if (unit.GetComponent<MovementController>() != null)
         {
             unit.GetComponent<MovementController>().Transition(sp);

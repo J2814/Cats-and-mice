@@ -16,6 +16,11 @@ public class Unit : MonoBehaviour
             Die();
         }
 
+        if (this.CompareTag("Mouse") && collider.CompareTag("Salvation"))
+        {
+            Saved();
+        }
+
         if (collider.gameObject.GetComponent<Unit>() == null) return;
 
         Unit otherUnit = collider.gameObject.GetComponent<Unit>();
@@ -44,6 +49,11 @@ public class Unit : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void Saved()
+    {
+        
     }
 
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AdaptiveSpawner : Spawner
 {
+    public bool CatSpawner;
+
     private LevelManager levelManager;
 
     public float SpawnTime;
@@ -13,7 +15,7 @@ public class AdaptiveSpawner : Spawner
     private bool AllowSpawn = true;
 
     [SerializeField]
-    private int MaxSpawnedCats;
+    private int MaxSpawnedUnits;
 
     private void OnEnable()
     {
@@ -42,10 +44,21 @@ public class AdaptiveSpawner : Spawner
         currentSpawnTime -= Time.deltaTime;
         if (currentSpawnTime <= 0)
         {
-            if (levelManager.CurrentSpawnedCats < MaxSpawnedCats)
+            if (CatSpawner)
             {
-                RandomSpawn();
+                if (levelManager.CurrentSpawnedCats < MaxSpawnedUnits)
+                {
+                    RandomSpawn();
+                }
             }
+            else
+            {
+                if (levelManager.CurrentSpawnedMice < MaxSpawnedUnits)
+                {
+                    RandomSpawn();
+                }
+            }
+
             currentSpawnTime = SpawnTime;
         }
     }
