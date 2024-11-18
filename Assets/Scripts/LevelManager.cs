@@ -133,7 +133,44 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("StartGame method");
         SceneManager.LoadScene(1); 
+    }
+
+    public GameObject startMenu;  
+    public GameObject levelsPanel; 
+    public GameObject optionPanel;
+
+    public void ShowLevels()
+    {
+        startMenu.SetActive(false);  
+        levelsPanel.SetActive(true);
+    }
+
+    public void CloseLevels()
+    {
+        startMenu.SetActive(true);  
+        levelsPanel.SetActive(false); 
+    }
+
+    public void ShowOptions()
+    {
+        startMenu.SetActive(false);
+        optionPanel.SetActive(true);
+    }
+
+    public void CloseOptions()
+    {
+        startMenu.SetActive(true);
+        optionPanel?.SetActive(false);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }
