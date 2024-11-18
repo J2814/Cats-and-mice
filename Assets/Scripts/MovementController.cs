@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
     public float Speed;
     public float MaxDistance = 0.1f;
 
+    public bool AllowMovement = true;
     
     private void Update()
     {
@@ -17,6 +18,8 @@ public class MovementController : MonoBehaviour
     }
     public void UpdateMovement()
     {
+        if (!AllowMovement) { return; }
+
         if(CurrentPoint == null)
         {
             Debug.Log("Current point is null");
