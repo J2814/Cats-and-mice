@@ -10,6 +10,7 @@ public class PathVisualisation : MonoBehaviour
     {
         path = GetComponent<MovementPath>();
         InitLineRenderer();
+        lineRenderer.startWidth = 0.2f;
     }
 
     private void InitLineRenderer()
@@ -19,7 +20,8 @@ public class PathVisualisation : MonoBehaviour
 
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
-            lineRenderer.SetPosition(i, path.PathElements[i].position);
+            Vector3 pos = new Vector3(path.PathElements[i].position.x, path.PathElements[i].position.y - 0.5f, path.PathElements[i].position.z);
+            lineRenderer.SetPosition(i, pos);
         }
     }
 }

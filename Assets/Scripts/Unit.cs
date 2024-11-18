@@ -1,11 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
     private MovementController movementController;
 
+    private Collider hitbox;
+
+    public float DeathTime = 0.7f;
     void Start()
     {
+        hitbox = GetComponent<Collider>();
         movementController = GetComponent<MovementController>();
     }
 
@@ -38,6 +43,12 @@ public class Unit : MonoBehaviour
     }
     private void Die()
     {
+        hitbox.enabled = false;
+
+        GetComponentInChildren<FaceAnimator>().PlayDeathAnim();
+
+        movementController.AllowMovement = false;
+
         if (this.CompareTag("Cat"))
         {
             LevelManager.CatDied?.Invoke();
@@ -47,13 +58,20 @@ public class Unit : MonoBehaviour
         {
             LevelManager.MouseDied?.Invoke();
         }
-
-        Destroy(gameObject);
+        StartCoroutine(WaitForDeath());
+        
     }
 
     private void Saved()
     {
         
+    }
+
+
+    public IEnumerator WaitForDeath()
+    {
+        yield return new WaitForSeconds(DeathTime);
+        Destroy(this.gameObject);
     }
 
 }
