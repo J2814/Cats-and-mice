@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -57,7 +59,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) PauseGame(); Debug.Log("Pause");
+        if (Input.GetKeyDown(KeyCode.Escape)) PauseGame(); //Debug.Log("Pause");
     }
     private void UpdateDeadCats()
     {
@@ -127,5 +129,11 @@ public class LevelManager : MonoBehaviour
 
 
         UiManager.PauseAction?.Invoke(isPaused);
+    }
+
+    public void StartGame()
+    {
+        Debug.Log("StartGame method");
+        SceneManager.LoadScene(1); 
     }
 }
