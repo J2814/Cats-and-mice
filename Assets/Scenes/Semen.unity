@@ -553,6 +553,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!114 &226226312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,6 +1149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!1 &415159067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1760,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!1 &594602234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,14 +1850,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594602234}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 22.17, z: 0}
+  m_LocalRotation: {x: 0.56905574, y: -0, z: -0, w: 0.82229894}
+  m_LocalPosition: {x: 0, y: 23.9, z: -10.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1342475132}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 69.369, y: 0, z: 0}
 --- !u!1 &598981869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,6 +1926,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!1 &602741699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,6 +2638,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!114 &787447282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3099,6 +3124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!114 &977231878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,6 +3244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!1 &1085013513
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,6 +3299,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!4 &1085013516
 Transform:
   m_ObjectHideFlags: 0
@@ -3578,6 +3618,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!4 &1220848587
 Transform:
   m_ObjectHideFlags: 0
@@ -4532,6 +4577,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!114 &1605970033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4809,6 +4859,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!114 &1796681896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5335,6 +5390,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!1 &1885777079
 GameObject:
   m_ObjectHideFlags: 0
@@ -5909,6 +5969,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!1 &2090350706
 GameObject:
   m_ObjectHideFlags: 0
@@ -5959,6 +6024,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969ce27b3afdc384c87ea89a5ad4f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathColor: {r: 1, g: 1, b: 1, a: 1}
+  intersectionActiveColor: {r: 0, g: 0, b: 1, a: 1}
+  intersectionOffColor: {r: 1, g: 0, b: 0, a: 1}
+  width: 0.2
+  material: {fileID: 0}
 --- !u!4 &2090350709
 Transform:
   m_ObjectHideFlags: 0
@@ -6175,6 +6245,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1220848587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &893381414041568718
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1089699573542151127, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_Name
+      value: PathVisualisationSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320163431757034309, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a625b7d4a2e222a4390ebfcbbf2ec2b8, type: 3}
 --- !u!1001 &3184312647919397773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6315,3 +6442,4 @@ SceneRoots:
   - {fileID: 7666556990833017716}
   - {fileID: 208764151}
   - {fileID: 2016664542}
+  - {fileID: 893381414041568718}

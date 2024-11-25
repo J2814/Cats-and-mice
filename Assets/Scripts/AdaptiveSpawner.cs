@@ -35,7 +35,6 @@ public class AdaptiveSpawner : Spawner
     void Update()
     {
         TimedRandomSpawn();
-        Debug.Log(AllowSpawn);
     }
 
     private void TimedRandomSpawn()

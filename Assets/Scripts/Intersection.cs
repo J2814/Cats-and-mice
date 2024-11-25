@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Intersection : MonoBehaviour
@@ -13,7 +14,8 @@ public class Intersection : MonoBehaviour
     }
     private void Start()
     {
-        EnableCurrentPath();
+        StartCoroutine(EnableCurrentPathDelay());
+        //EnableCurrentPath();
     }
 
     private void Update()
@@ -50,5 +52,13 @@ public class Intersection : MonoBehaviour
                 availablePaths[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    IEnumerator EnableCurrentPathDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        EnableCurrentPath();
     }
 }

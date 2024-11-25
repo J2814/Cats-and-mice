@@ -1,5 +1,6 @@
 public class IntersectionPath : MovementPath
 {
+
     public void ForceConnectionToSelf()
     {
         foreach (Connection conn in Connections)
