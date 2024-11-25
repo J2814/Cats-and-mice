@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2278108865966143202}
   - component: {fileID: 8368699884953822929}
   - component: {fileID: 3913807910865723585}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mouse
   m_TagString: Mouse
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1303027191970200707}
   - component: {fileID: 6737426657338681285}
   - component: {fileID: 721954844786030908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}

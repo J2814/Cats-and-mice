@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1906622908895177402}
   - component: {fileID: 3838180073305226691}
   - component: {fileID: 6516420388018363484}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DeathTrap
   m_TagString: DeathTrap
   m_Icon: {fileID: 0}

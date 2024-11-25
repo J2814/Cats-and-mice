@@ -20,7 +20,7 @@ public class PathVisualisation : MonoBehaviour
 
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
-            Vector3 pos = new Vector3(path.PathElements[i].position.x, path.PathElements[i].position.y - 0.5f, path.PathElements[i].position.z);
+            Vector3 pos = new Vector3(path.PathElements[i].position.x, path.PathElements[i].position.y, path.PathElements[i].position.z);
             lineRenderer.SetPosition(i, pos);
         }
     }
