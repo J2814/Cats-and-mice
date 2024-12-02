@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class PathVisualisation : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Will be overwritten if there is PathVisualisationSettings present in the scene")]
-    private float width = 0.2f;
+    private float defaultWidth = 0.2f;
 
     [SerializeField]
     [Tooltip("Will be overwritten if there is PathVisualisationSettings present in the scene")]
@@ -39,14 +40,14 @@ public class PathVisualisation : MonoBehaviour
 
     private void GetSettings()
     {
-        if (PathVisualisationSettings.instance != null)
+        if (VisualSettings.instance != null)
         {
-            pathColor = PathVisualisationSettings.instance.PathColor;
-            intersectionActiveColor = PathVisualisationSettings.instance.IntersectionActiveColor;
-            intersectionOffColor = PathVisualisationSettings.instance.IntersectionOffColor;
-            width = PathVisualisationSettings.instance.Width;
-            Yoffset = PathVisualisationSettings.instance.Yoffset;
-            material = PathVisualisationSettings.instance.Material;
+            pathColor = VisualSettings.instance.PathColor;
+            intersectionActiveColor = VisualSettings.instance.IntersectionActiveColor;
+            intersectionOffColor = VisualSettings.instance.IntersectionOffColor;
+            defaultWidth = VisualSettings.instance.PathWidth;
+            Yoffset = VisualSettings.instance.PathYoffset;
+            material = VisualSettings.instance.PathMaterial;
         }
     }
 
@@ -55,7 +56,7 @@ public class PathVisualisation : MonoBehaviour
         lineRenderer = GetComponentInChildren<LineRenderer>();
         lineRenderer.material = material;
         lineRenderer.positionCount = path.PathElements.Length;
-        lineRenderer.startWidth = width;
+        lineRenderer.startWidth = defaultWidth;
         lineRenderer.colorGradient = ColorSetUp();
         lineRenderer.sortingOrder = 1;
 
@@ -66,7 +67,7 @@ public class PathVisualisation : MonoBehaviour
             offPathLineRenderer = lineObject.AddComponent<LineRenderer>();
             offPathLineRenderer.material = material;
             offPathLineRenderer.positionCount = path.PathElements.Length;
-            offPathLineRenderer.startWidth = width;
+            offPathLineRenderer.startWidth = defaultWidth;
             offPathLineRenderer.colorGradient = ColorGradient(intersectionOffColor);
             offPathLineRenderer.sortingOrder = -1;
         }
@@ -81,6 +82,13 @@ public class PathVisualisation : MonoBehaviour
                 offPathLineRenderer.SetPosition(i, pos);
             }
         }
+    }
+
+    public void PunchWidth()
+    {
+        Sequence widthSeq = DOTween.Sequence();
+        widthSeq.Append(DOTween.To(() => lineRenderer.startWidth, x => lineRenderer.startWidth = x, 1, 0.1f));
+        widthSeq.Append(DOTween.To(() => lineRenderer.startWidth, x => lineRenderer.startWidth = x, defaultWidth, 0.1f));
     }
 
     private Gradient ColorSetUp()

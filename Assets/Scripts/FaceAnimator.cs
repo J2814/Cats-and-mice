@@ -28,7 +28,11 @@ public class FaceAnimator : MyAnimator
 
     private void OnDestroy()
     {
-        DOTween.Clear(this);
+        //DOTween.Clear(this);
+
+        DOTween.Kill(transform.parent.transform);
+        DOTween.Kill(transform);
+        
     }
     public override void SetUpAnimator()
     {

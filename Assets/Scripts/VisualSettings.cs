@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PathVisualisationSettings : MonoBehaviour
+public class VisualSettings : MonoBehaviour
 {
-    public static PathVisualisationSettings instance;
+    public static VisualSettings instance;
 
     public Color IntersectionActiveColor;
     public Color IntersectionOffColor;
     public Color PathColor;
 
-    public float Yoffset;
+    public float PathYoffset;
 
-    public float Width;
+    public float PathWidth;
 
-    public Material Material;
+    public Material PathMaterial;
+
+    public float IntersectionTextPunchScale = 1.25f;
+
+    public Color IntersectionColorPunch;
 
 
     private void Awake()
