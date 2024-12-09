@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8602260639116270678}
   - component: {fileID: 3896522822818638741}
   - component: {fileID: 2639589125512869821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Salvation
   m_TagString: Salvation
   m_Icon: {fileID: 0}

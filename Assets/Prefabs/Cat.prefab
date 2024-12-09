@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4706667437959062219}
   - component: {fileID: 8666646638865139000}
   - component: {fileID: 8462442320733283051}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1600489180633711901}
   - component: {fileID: 4978642793196928807}
   - component: {fileID: 3349540266777890653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cat
   m_TagString: Cat
   m_Icon: {fileID: 0}
@@ -153,14 +153,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7065459703906632848}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.5757903, y: 0, z: 0, w: 0.81759745}
   m_LocalPosition: {x: 11.536203, y: 7.9905787, z: 0.6292305}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3731234419957765414}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70.31, y: 0, z: 0}
 --- !u!212 &7001603015046446786
 SpriteRenderer:
   m_ObjectHideFlags: 0

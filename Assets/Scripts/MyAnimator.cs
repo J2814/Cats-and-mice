@@ -14,7 +14,7 @@ public abstract class MyAnimator : MonoBehaviour
     public virtual void ChangeAnimationState(string newAnimation)
     {
         if (currentAnimation == newAnimation) return;
-
+        
         animator.Play(newAnimation);
         currentAnimation = newAnimation;
     }

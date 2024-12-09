@@ -1,4 +1,9 @@
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Intersection : MonoBehaviour
 {
@@ -6,14 +11,22 @@ public class Intersection : MonoBehaviour
     [SerializeField]
     private int currentPathIndex = 0;
     public KeyCode switchKey;
-    
+
+    private IntersectionText KeyText;
+
     public MovementPath[] GetAvailablePaths()
     {
         return availablePaths;
     }
     private void Start()
     {
-        EnableCurrentPath();
+        StartCoroutine(EnableCurrentPathDelay());
+
+        KeyText = GetComponentInChildren<IntersectionText>();
+        if (KeyText != null) 
+        {
+            KeyText.SetText(switchKey.ToString());
+        }
     }
 
     private void Update()
@@ -21,6 +34,13 @@ public class Intersection : MonoBehaviour
         if (Input.GetKeyDown(switchKey))
         {
             SwitchCurrentPath();
+
+            if (KeyText != null)
+            {
+                KeyText.PunchAnim();
+            }
+
+            availablePaths[currentPathIndex].GetComponent<PathVisualisation>().PunchWidth();
         }
     }
 
@@ -50,5 +70,18 @@ public class Intersection : MonoBehaviour
                 availablePaths[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    /// <summary>
+    /// something was breaking before i did this. After waiting for a couple frames problem goes away.
+    /// I don't know why and actually don't care to know
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator EnableCurrentPathDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        EnableCurrentPath();
     }
 }

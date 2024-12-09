@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2278108865966143202}
   - component: {fileID: 8368699884953822929}
   - component: {fileID: 3913807910865723585}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mouse
   m_TagString: Mouse
   m_Icon: {fileID: 0}
@@ -29,14 +29,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2656477548043759988}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.5757903, y: 0, z: 0, w: 0.81759745}
   m_LocalPosition: {x: 10.195, y: 7.9905787, z: 0.6292305}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3204290545692919265}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70.31, y: 0, z: 0}
 --- !u!212 &3660442552147820391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1303027191970200707}
   - component: {fileID: 6737426657338681285}
   - component: {fileID: 721954844786030908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}

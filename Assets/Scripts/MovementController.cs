@@ -97,7 +97,7 @@ public class MovementController : MonoBehaviour
 
     public void Transition(MovementPath mp, bool forward)
     {
-        Debug.Log(mp.gameObject.name);
+        //Debug.Log(mp.gameObject.name);
         myPath = mp;
         if (forward)
         {
