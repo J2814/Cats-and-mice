@@ -26,6 +26,20 @@ public class IntersectionPath : MovementPath
         }
     }
 
+    public void DisconnectFromSelf()
+    {
+        foreach (Connection conn in Connections)
+        {
+            foreach (Connection pathconn in conn.path.Connections)
+            {
+                if (pathconn.path == this)
+                {
+                    pathconn.path = null;
+                }
+            }
+
+        }
+    }
     private void HandleConnection(Connection conn, ConnectionTypeEnum targetType)
     {
         foreach (Connection c in conn.path.Connections)

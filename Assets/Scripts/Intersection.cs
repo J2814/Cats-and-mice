@@ -68,6 +68,7 @@ public class Intersection : MonoBehaviour
             else
             {
                 availablePaths[i].gameObject.SetActive(false);
+                availablePaths[i].DisconnectFromSelf();
             }
         }
     }

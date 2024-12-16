@@ -22,6 +22,8 @@ public class MovementPath : MonoBehaviour
     }
     public List<Connection> Connections = new List<Connection>();
 
+    public List<Connection> FallbackConnections = new List<Connection>();
+
     public void OnDrawGizmos()        
     {
         if (PathElements == null || PathElements.Length < 2) return;

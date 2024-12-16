@@ -38,33 +38,74 @@ public class MovementController : MonoBehaviour
 
     public void NextMove()
     {
+        bool transitionFound = false;
         if (moveForward)
         {
+            //move forward logic
             if (CurrentPoint != myPath.PathElements[myPath.PathElements.Length - 1]) { CurrentPoint = GetNextPathPoint(); return; }
             foreach (MovementPath.Connection conn in myPath.Connections)
             {
                 if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.EndToStart && conn.path != null && conn.path.isActiveAndEnabled)
                 {
                     Transition(conn.path, true);
+                    transitionFound = true;
                 }
                 if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.EndToEnd && conn.path != null && conn.path.isActiveAndEnabled)
                 {
                     Transition(conn.path, false);
+                    transitionFound = true;
+                }
+            }
+
+            if (!transitionFound)
+            {
+                foreach (MovementPath.Connection conn in myPath.FallbackConnections)
+                {
+                    if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.EndToStart && conn.path != null && conn.path.isActiveAndEnabled)
+                    {
+                        Transition(conn.path, true);
+                        transitionFound = true;
+                    }
+                    if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.EndToEnd && conn.path != null && conn.path.isActiveAndEnabled)
+                    {
+                        Transition(conn.path, false);
+                        transitionFound = true;
+                    }
                 }
             }
         }
         else
         {
+            //move backward logic
             if (CurrentPoint != myPath.PathElements[0]) { CurrentPoint = GetNextPathPoint(); return; }
             foreach (MovementPath.Connection conn in myPath.Connections)
             {
                 if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.StartToEnd && conn.path != null && conn.path.isActiveAndEnabled)
                 {
                     Transition(conn.path, false);
+                    transitionFound = true;
                 }
                 if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.StartToStart && conn.path != null && conn.path.isActiveAndEnabled)
                 {
                     Transition(conn.path, true);
+                    transitionFound = true;
+                }
+            }
+
+            if (!transitionFound)
+            {
+                foreach (MovementPath.Connection conn in myPath.FallbackConnections)
+                {
+                    if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.StartToEnd && conn.path != null && conn.path.isActiveAndEnabled)
+                    {
+                        Transition(conn.path, false);
+                        transitionFound = true;
+                    }
+                    if (conn.ConnectionType == MovementPath.ConnectionTypeEnum.StartToStart && conn.path != null && conn.path.isActiveAndEnabled)
+                    {
+                        Transition(conn.path, true);
+                        transitionFound = true;
+                    }
                 }
             }
         }
