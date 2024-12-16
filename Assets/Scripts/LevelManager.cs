@@ -30,13 +30,16 @@ public class LevelManager : MonoBehaviour
     public static Action Pause;
     public static Action EndLevel;
 
+    public static Action<int, int> CurrentScore;
 
     public int CurrentSpawnedCats;
     public int CurrentSpawnedMice;
 
-    private bool isPaused = false;
 
     private bool LevelEnded = false;
+
+
+   
 
     private void OnEnable()
     {
@@ -57,6 +60,12 @@ public class LevelManager : MonoBehaviour
         MouseSaved -= UpdateSavedMice;
         Pause -= PauseGame;
     }
+
+    private void Start()
+    {
+        CurrentScore?.Invoke(CurrentNumberOfDeadCats, NumberOfDeadCatsToWin);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) PauseGame(); //Debug.Log("Pause");
@@ -68,10 +77,12 @@ public class LevelManager : MonoBehaviour
 
         if (KillCatsToWin)
         {
+            CurrentScore?.Invoke(CurrentNumberOfDeadCats, NumberOfDeadCatsToWin);
             if (CurrentNumberOfDeadCats >= NumberOfDeadCatsToWin)
             {
                 Debug.Log("Win");
-                UiManager.WinScreen?.Invoke();
+                GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.WinScreen);
+                //UiManager.WinScreen?.Invoke();
                 EndLevel?.Invoke();
             }
         }
@@ -87,7 +98,8 @@ public class LevelManager : MonoBehaviour
             if (CurrentNumberOfSavedMice >= NumberOfSavedMiceToWin)
             {
                 Debug.Log("Win");
-                UiManager.WinScreen?.Invoke();
+                GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.WinScreen);
+                //UiManager.WinScreen?.Invoke();
                 EndLevel?.Invoke();
             }
         }
@@ -103,7 +115,8 @@ public class LevelManager : MonoBehaviour
         if (CurrentNumberOfDeadMice >= NumberOfDeadMiceToLoose)
         {
             Debug.Log("Loose");
-            UiManager.LooseScreen?.Invoke();
+            GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.LooseScreen);
+            //UiManager.LooseScreen?.Invoke();
             EndLevel?.Invoke();
         }
     }
@@ -123,11 +136,6 @@ public class LevelManager : MonoBehaviour
     {
         if (LevelEnded) return;
 
-        isPaused = !isPaused;
-
-        Time.timeScale = isPaused ? 0 : 1;
-
-
-        UiManager.PauseAction?.Invoke(isPaused);
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Pause);
     }
 }

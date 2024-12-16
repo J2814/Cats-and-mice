@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UiManager : MonoBehaviour
+public class UiManager : MonoBehaviour, IGameStateResonder
 {
+
+
+    public static UiManager instance;
+
     public GameObject PauseUi;
     public GameObject SettingsUi;
     public GameObject GameplayUi;
@@ -13,15 +17,31 @@ public class UiManager : MonoBehaviour
     public GameObject LooseUi;
 
 
-    public GameObject startPanel;
-    public GameObject levelsPanel;
+    public GameObject MainMenuUi;
+    public GameObject LevelSelectMenu;
     //public GameObject optionPanel;
+    private void OnEnable()
+    {
+        GameStateManager.CurrentGameState += RespondToGameState;
+    }
 
-    public static Action<bool> PauseAction;
-    public static Action WinScreen;
-    public static Action LooseScreen;
+    private void OnDisable()
+    {
+        GameStateManager.CurrentGameState -= RespondToGameState;
+    }
 
-    private bool isPaused = false;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void Update()
     {
@@ -31,99 +51,131 @@ public class UiManager : MonoBehaviour
         }
     }
 
-
-    private void OnEnable()
+    public void RespondToGameState(GameStateManager.GameState gameState)
     {
-        PauseAction += Pause;
-        WinScreen += Win;
-        LooseScreen += Loose;
-    }
-    private void OnDisable()
-    {
-        PauseAction -= Pause;
-        WinScreen -= Win;
-        LooseScreen -= Loose;
-    }
-
-    public void Pause(bool isPaused)
-    {
-        if (isPaused)
+        if (gameState == GameStateManager.GameState.WinScreen)
         {
-            PauseUi.SetActive(true);
-            SettingsUi.SetActive(false);
+            ShowWinScreen();
         }
-        else
+
+        if (gameState == GameStateManager.GameState.LooseScreen)
         {
-            PauseUi.SetActive(false);
-            SettingsUi.SetActive(false);
+            ShowLooseScreen();
+        }
+
+        if (gameState == GameStateManager.GameState.Pause)
+        {
+            Pause();
+        }
+
+        if (gameState == GameStateManager.GameState.MainMenu)
+        {
+            MainMenu();
+        }
+
+        if (gameState == GameStateManager.GameState.Gameplay)
+        {
+            Gameplay();
         }
     }
 
     public void Pause()
     {
-        isPaused = !isPaused;
+        PauseUi.SetActive(true);
 
-        Time.timeScale = isPaused ? 0 : 1;
-
-        startPanel.SetActive(!isPaused);
-        PauseUi.SetActive(isPaused);
+        SettingsUi?.SetActive(false);
+        MainMenuUi?.SetActive(false);
+        WinUi.SetActive(false);
+        LooseUi.SetActive(false);
     }
-
+    public void Gameplay()
+    {
+        GameplayUi.SetActive(true);
+        SettingsUi?.SetActive(false);
+        MainMenuUi?.SetActive(false);
+        PauseUi?.SetActive(false);
+        WinUi.SetActive(false);
+        LooseUi.SetActive(false);
+    }
     public void OpenSettings()
     {
         SettingsUi.SetActive(true);
         PauseUi.SetActive(false);
-        startPanel.SetActive(false);
+        MainMenuUi.SetActive(false);
     }
 
     public void CloseSettings()
     {
-        PauseUi.SetActive(true);
+        if (GameStateManager.instance.MyGameState == GameStateManager.GameState.MainMenu)
+        {
+            MainMenuUi.SetActive(true);
+        }
+
+        if (GameStateManager.instance.MyGameState == GameStateManager.GameState.Pause)
+        {
+            PauseUi.SetActive(true);
+        }
+        
         SettingsUi.SetActive(false);
     }
 
-    public void CloseOptions()
-    {
-        startPanel.SetActive(true);
-        SettingsUi?.SetActive(false);
-    }
-
-    private void Win()
+    private void ShowWinScreen()
     {
         WinUi.SetActive(true);
+
+        SettingsUi?.SetActive(false);
+        MainMenuUi?.SetActive(false);
+        PauseUi?.SetActive(false);
+        WinUi.SetActive(false);
+        LooseUi.SetActive(false);
     }
 
-    private void Loose()
+    private void ShowLooseScreen()
     {
         LooseUi.SetActive(true);
+
+        SettingsUi?.SetActive(false);
+        MainMenuUi?.SetActive(false);
+        PauseUi?.SetActive(false);
+        WinUi.SetActive(false);
+        LooseUi.SetActive(false);
     }
 
     public void StartGame()
     {
-        startPanel.SetActive(false);
-        GameplayUi.SetActive(true);
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
         SceneManager.LoadScene(1);
+
+        
     }
 
-    public void ShowLevels()
+    public void OpenLevelSelect()
     {
-        startPanel.SetActive(false);
-        levelsPanel.SetActive(true);
+        MainMenuUi.SetActive(false);
+        PauseUi.SetActive(false);
+        LevelSelectMenu.SetActive(true);
     }
 
-    public void CloseLevels()
+    public void CloseLevelSelect()
     {
-        startPanel.SetActive(true);
-        levelsPanel.SetActive(false);
+        if (GameStateManager.instance.MyGameState == GameStateManager.GameState.MainMenu)
+        {
+            MainMenuUi.SetActive(true);
+        }
+
+        if (GameStateManager.instance.MyGameState == GameStateManager.GameState.Pause)
+        {
+            PauseUi.SetActive(true);
+        }
+
+        LevelSelectMenu.SetActive(false);
     }
 
    
 
     public void ResumeGame()
     {
-        isPaused = false;
-        Time.timeScale = 1;
-        PauseUi.SetActive(false);
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
     }
 
     public void RestartLevel()
@@ -131,7 +183,32 @@ public class UiManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
 
-        Time.timeScale = 1;
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
+    }
+
+    public void OpenMainMenu()
+    {
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.MainMenu);
+
+        
+    }
+
+    private void MainMenu()
+    {
+        MainMenuUi.SetActive(true);
+        PauseUi.SetActive(false);
+        GameplayUi.SetActive(false);
+        SettingsUi.SetActive(false);
+        LevelSelectMenu.SetActive(false);
+    }
+
+    public void LoadLevel(int buildIndex)
+    {
+
+
+        SceneManager.LoadScene(buildIndex);
+
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
     }
 
     public void QuitGame()
