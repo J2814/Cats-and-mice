@@ -67,30 +67,6 @@ public class AudioManager : MonoBehaviour
             SetMusicVolume(1);
         }
     }
-    int RandElement<T>(List<T> list)
-    {
-        if (list.Count > 0)
-        {
-            return Random.Range(0, list.Count - 1);
-        }
-        else
-        {
-            return -1;
-        }
-    }
-
-    public Sound RandomSoundFromList(List<Sound> SoundList)
-    {
-        int index = RandElement<Sound>(SoundList);
-        if (index < 0)
-        {
-            return null;
-        }
-        else
-        {
-            return SoundList[index];
-        }
-    }
 
     public void PlaySound(Sound sound)
     {
@@ -99,11 +75,14 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        //Debug.Log("Play sound" + sound.clip.name);
+
         bool clipPlayed = false;
         foreach (AudioSource source in sourcePool)
         {
             if (!source.isPlaying)
             {
+                source.volume = sound.volume;
                 source.outputAudioMixerGroup = sound.mixerGroup;
                 source.clip = sound.clip;
                 source.Play();
@@ -113,12 +92,37 @@ public class AudioManager : MonoBehaviour
         if (!clipPlayed)
         {
             AudioSource source = sourcePool[UnityEngine.Random.Range(0, sourcePool.Count - 1)];
+            source.volume = sound.volume;
             source.outputAudioMixerGroup = sound.mixerGroup;
             source.clip = sound.clip;
             source.Play();
         }
     }
 
+    public void PlayMusic(Sound sound)
+    {
+        if (sound == null)
+        {
+            return;
+        }
+
+        MusicSource.Stop();
+        MusicSource.clip = sound.clip;
+        MusicSource.volume = sound.volume;
+        MusicSource.outputAudioMixerGroup= sound.mixerGroup;
+
+
+        MusicSource.Play();
+    }
+
+    public void PauseMusicSource()
+    {
+        MusicSource.Pause();
+    }
+    public void ResumeMusicSource()
+    {
+        MusicSource.Play();
+    }
     public void SetMasterVolume(float volume)
     {
         PlayerPrefs.SetFloat("MasterVolume", volume);
@@ -129,8 +133,8 @@ public class AudioManager : MonoBehaviour
     {
         float volume = 0;
         Mixer.GetFloat("MasterVolume", out volume);
-        volume = Mathf.Pow(10, volume);
-
+        volume = Mathf.Pow(10, volume / 20f);
+       
         return volume;
     }
 
@@ -144,8 +148,8 @@ public class AudioManager : MonoBehaviour
     {
         float volume = 0;
         Mixer.GetFloat("SfxVolume", out volume);
-        volume = Mathf.Pow(10, volume);
-
+        volume = Mathf.Pow(10, volume / 20f);
+        
         return volume;
     }
 
@@ -159,7 +163,7 @@ public class AudioManager : MonoBehaviour
     {
         float volume = 0;
         Mixer.GetFloat("MusicVolume", out volume);
-        volume = Mathf.Pow(10, volume);
+        volume = Mathf.Pow(10, volume / 20f);
 
         return volume;
     }

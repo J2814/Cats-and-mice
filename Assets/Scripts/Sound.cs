@@ -9,4 +9,5 @@ public class Sound : ScriptableObject
 {
     public AudioClip clip;
     public AudioMixerGroup mixerGroup;
+    public float volume;
 }

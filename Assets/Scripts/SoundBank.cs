@@ -5,25 +5,29 @@ using UnityEngine;
 [CreateAssetMenu]
 public class SoundBank : ScriptableObject
 {
-    public Sound CatDeath;
+    public Sound IntersectionSwitch;
 
     public Sound MouseDeath;
 
-    public Sound Gameover;
+    public Sound CatDeath;
+
+    public Sound MouseSpawn;
+
+    public Sound CatSpawn;
+
+    public Sound Loose;
 
     public Sound Win;
 
     public Sound Pause;
 
-    public Sound Start;
-
     public Sound Resume;
 
-    public Sound GenericUiClick;
+    public Sound GenericUi;
 
-    public Sound IntersectionSwitch;
+    public Sound MainMenuMusic;
 
-
+    public Sound GameplayMusic;
 
 
 }
