@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
 public class ScoreDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI ScoreText;
+    public Text ScoreText;
 
     private void OnEnable()
     {

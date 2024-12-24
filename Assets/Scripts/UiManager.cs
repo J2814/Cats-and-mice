@@ -11,7 +11,6 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     public static UiManager instance;
 
     public GameObject PauseUi;
-    public GameObject SettingsUi;
     public GameObject GameplayUi;
     public GameObject WinUi;
     public GameObject LooseUi;
@@ -83,7 +82,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     {
         PauseUi.SetActive(true);
 
-        SettingsUi?.SetActive(false);
+        
         MainMenuUi?.SetActive(false);
         WinUi.SetActive(false);
         LooseUi.SetActive(false);
@@ -91,39 +90,20 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     public void Gameplay()
     {
         GameplayUi.SetActive(true);
-        SettingsUi?.SetActive(false);
+        
         MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
         WinUi.SetActive(false);
         LooseUi.SetActive(false);
     }
-    public void OpenSettings()
-    {
-        SettingsUi.SetActive(true);
-        PauseUi.SetActive(false);
-        MainMenuUi.SetActive(false);
-    }
+    
 
-    public void CloseSettings()
-    {
-        if (GameStateManager.instance.MyGameState == GameStateManager.GameState.MainMenu)
-        {
-            MainMenuUi.SetActive(true);
-        }
-
-        if (GameStateManager.instance.MyGameState == GameStateManager.GameState.Pause)
-        {
-            PauseUi.SetActive(true);
-        }
-        
-        SettingsUi.SetActive(false);
-    }
 
     private void ShowWinScreen()
     {
         WinUi.SetActive(true);
 
-        SettingsUi?.SetActive(false);
+        
         MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
         WinUi.SetActive(false);
@@ -134,7 +114,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     {
         LooseUi.SetActive(true);
 
-        SettingsUi?.SetActive(false);
+        
         MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
         WinUi.SetActive(false);
@@ -198,7 +178,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         MainMenuUi.SetActive(true);
         PauseUi.SetActive(false);
         GameplayUi.SetActive(false);
-        SettingsUi.SetActive(false);
+        
         LevelSelectMenu.SetActive(false);
     }
 
