@@ -202,9 +202,13 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         LevelSelectMenu.SetActive(false);
     }
 
+    public void TimeScaleButtonToggle()
+    {
+        GameStateManager.instance.TimeScaleToggle();
+    }
+
     public void LoadLevel(int buildIndex)
     {
-
 
         SceneManager.LoadScene(buildIndex);
 
