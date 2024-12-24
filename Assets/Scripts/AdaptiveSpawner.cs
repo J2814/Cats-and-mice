@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
 
 public class AdaptiveSpawner : Spawner
 {
@@ -12,7 +14,25 @@ public class AdaptiveSpawner : Spawner
     public float SpawnTime;
     private float currentSpawnTime;
 
-    private bool AllowSpawn = true;
+    public enum StartUpDelaySpawn
+    {
+        TimedDelay,
+        KeyPressDelay
+    }
+
+    public StartUpDelaySpawn StartUpType = StartUpDelaySpawn.TimedDelay;
+
+    public KeyCode SpawnKey;
+
+    public int SpawnKeyPressesRequired = 3;
+
+    private int spawnKeyPresses;
+
+
+    public float StartUpDelayTime = 1;
+
+
+    private bool AllowSpawn = false;
 
     [SerializeField]
     private int MaxSpawnedUnits;
@@ -28,13 +48,40 @@ public class AdaptiveSpawner : Spawner
     }
     void Start()
     {
+        if (StartUpType == StartUpDelaySpawn.TimedDelay)
+        {
+            StartCoroutine(StartUpDelay());
+        }
+
+
+
+
+
         levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        KeyPressesDelay();
+
         TimedRandomSpawn();
+    }
+
+    private void KeyPressesDelay()
+    {
+        if (StartUpType == StartUpDelaySpawn.KeyPressDelay)
+        {
+            if (Input.GetKeyDown(SpawnKey))
+            {
+                spawnKeyPresses++;
+            }
+
+            if (spawnKeyPresses >= SpawnKeyPressesRequired)
+            {
+                AllowSpawn = true;
+            }
+        }
     }
 
     private void TimedRandomSpawn()
@@ -68,4 +115,12 @@ public class AdaptiveSpawner : Spawner
         AllowSpawn = false;
     }
    
+
+
+    public IEnumerator StartUpDelay()
+    {
+        yield return new WaitForSeconds(StartUpDelayTime);
+
+        AllowSpawn = true;
+    }
 }
