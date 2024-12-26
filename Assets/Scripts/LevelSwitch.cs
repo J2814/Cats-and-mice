@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelSwitch : MonoBehaviour
 {
-    public static LevelSwitch instance;
+    //public static LevelSwitch instance;
 
     private int sceneCount;
     private List<int> levels;
@@ -24,18 +24,18 @@ public class LevelSwitch : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance != null)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //}
 
     public void SwitchLevel()
     {
@@ -49,6 +49,7 @@ public class LevelSwitch : MonoBehaviour
         }
 
         SceneManager.LoadScene(levels[currentLevelIndex]);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
     }
 
     public void SwitchLevel(int index)
@@ -56,6 +57,13 @@ public class LevelSwitch : MonoBehaviour
         if (index < levels.Count - 1)
         {
             SceneManager.LoadScene(levels[index]);
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
         }
+    }
+
+    public void SwitchLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
     }
 }

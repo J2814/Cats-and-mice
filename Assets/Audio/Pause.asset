@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30e2f93610752b4db511deffc3798a0, type: 3}
-  m_Name: New Sound
+  m_Name: Pause
   m_EditorClassIdentifier: 
-  clip: {fileID: 0}
-  mixerGroup: {fileID: 0}
+  clip: {fileID: 8300000, guid: 3434d5c70fd2d534cb43fbcdf5e7ec29, type: 3}
+  mixerGroup: {fileID: -7257853030834020351, guid: 3788f65429634dd44b598c5842dae02f, type: 2}
   volume: 1

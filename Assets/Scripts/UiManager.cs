@@ -8,7 +8,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
 {
 
 
-    public static UiManager instance;
+    //public static UiManager instance;
 
     public GameObject PauseUi;
     public GameObject GameplayUi;
@@ -29,18 +29,18 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         GameStateManager.CurrentGameState -= RespondToGameState;
     }
 
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance != null)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //}
 
     void Update()
     {
@@ -52,6 +52,8 @@ public class UiManager : MonoBehaviour, IGameStateResonder
 
     public void RespondToGameState(GameStateManager.GameState gameState)
     {
+
+        Debug.Log(gameState.ToString());
         if (gameState == GameStateManager.GameState.WinScreen)
         {
             ShowWinScreen();
@@ -83,50 +85,55 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         PauseUi.SetActive(true);
 
         
-        MainMenuUi?.SetActive(false);
+        //MainMenuUi?.SetActive(false);
         WinUi.SetActive(false);
         LooseUi.SetActive(false);
+
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+
     }
     public void Gameplay()
     {
         GameplayUi.SetActive(true);
         
-        MainMenuUi?.SetActive(false);
+        //MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
         WinUi.SetActive(false);
         LooseUi.SetActive(false);
     }
     
-
-
     private void ShowWinScreen()
     {
         WinUi.SetActive(true);
 
         
-        MainMenuUi?.SetActive(false);
+        //MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
-        WinUi.SetActive(false);
+        //WinUi.SetActive(false);
         LooseUi.SetActive(false);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Win);
     }
 
     private void ShowLooseScreen()
     {
+        Debug.Log("ShowLooseScreen");
         LooseUi.SetActive(true);
 
         
-        MainMenuUi?.SetActive(false);
+        //MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
         WinUi.SetActive(false);
-        LooseUi.SetActive(false);
+        //LooseUi.SetActive(false);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Loose);
     }
 
     public void StartGame()
     {
         GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
         SceneManager.LoadScene(1);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
 
-        
+
     }
 
     public void OpenLevelSelect()
@@ -134,6 +141,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         MainMenuUi.SetActive(false);
         PauseUi.SetActive(false);
         LevelSelectMenu.SetActive(true);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
     }
 
     public void CloseLevelSelect()
@@ -149,6 +157,8 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         }
 
         LevelSelectMenu.SetActive(false);
+
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Pause);
     }
 
    
@@ -156,6 +166,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     public void ResumeGame()
     {
         GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
     }
 
     public void RestartLevel()
@@ -164,10 +175,12 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         SceneManager.LoadScene(currentScene.buildIndex);
 
         GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Pause);
     }
 
     public void OpenMainMenu()
     {
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Pause);
         GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.MainMenu);
 
         
@@ -175,11 +188,12 @@ public class UiManager : MonoBehaviour, IGameStateResonder
 
     private void MainMenu()
     {
-        MainMenuUi.SetActive(true);
-        PauseUi.SetActive(false);
+        //MainMenuUi.SetActive(true);
+        //PauseUi.SetActive(false);
         GameplayUi.SetActive(false);
-        
-        LevelSelectMenu.SetActive(false);
+
+        //LevelSelectMenu.SetActive(false);
+        SceneManager.LoadScene("StartMenu");
     }
 
     public void TimeScaleButtonToggle()
@@ -195,8 +209,26 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
     }
 
+    public void LoadNextLevel()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        int buildIndex = currentScene.buildIndex;
+
+        if (buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(0);
+            GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.MainMenu);
+        }
+        else
+        {
+            SceneManager.LoadScene(buildIndex + 1);
+            GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
+        }
+    }
+
     public void QuitGame()
     {
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Pause);
         Time.timeScale = 1;
         SceneManager.LoadScene(0); 
     }

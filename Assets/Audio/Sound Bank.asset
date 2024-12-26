@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03be0aa9c5ee1942ba1b3bf4943d316, type: 3}
+  m_Name: Sound Bank
+  m_EditorClassIdentifier: 
+  IntersectionSwitch: {fileID: 11400000, guid: cdc38760a28bab844924a6d0d654093a, type: 2}
+  MouseDeath: {fileID: 11400000, guid: cd219aa28ff9dd149b2e7caaae2eabe9, type: 2}
+  CatDeath: {fileID: 11400000, guid: a9ec049bd671d96499ca87df9d568263, type: 2}
+  MouseSpawn: {fileID: 11400000, guid: 12a65038af77475489cb43e76948ff3c, type: 2}
+  CatSpawn: {fileID: 11400000, guid: 12a65038af77475489cb43e76948ff3c, type: 2}
+  Loose: {fileID: 11400000, guid: cdc38760a28bab844924a6d0d654093a, type: 2}
+  Win: {fileID: 11400000, guid: 30247cf231e2bc444ad48ee2f2b7603d, type: 2}
+  Pause: {fileID: 11400000, guid: 6904a035edfb7e1418d25602e4d21a6d, type: 2}
+  Resume: {fileID: 11400000, guid: c8856f028e4acf8428320b890221c74d, type: 2}
+  GenericUi: {fileID: 11400000, guid: c8856f028e4acf8428320b890221c74d, type: 2}
+  MainMenuMusic: {fileID: 0}
+  GameplayMusic: {fileID: 0}

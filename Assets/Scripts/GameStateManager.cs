@@ -97,8 +97,9 @@ public class GameStateManager : MonoBehaviour
     private void GameStateChange(GameState newGameState)
     {
         MyGameState = newGameState;
-        TimeManagement();
+        
         CurrentGameState?.Invoke(MyGameState);
+        TimeManagement();
     }
 
     private void TimeManagement()

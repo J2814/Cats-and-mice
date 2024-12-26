@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Levels/2.unity
     guid: 9fccc02a4e31bda4eac424e3433a0721
   - enabled: 1
+    path: Assets/Levels/Hourglass.unity
+    guid: f2f42d97372d0e24599b6958ee6ac5e1
+  - enabled: 1
     path: Assets/Levels/3.unity
     guid: df8cd6c089f035042ad9471bf9c432c4
   m_configObjects: {}

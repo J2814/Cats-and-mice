@@ -80,13 +80,12 @@ public class LevelManager : MonoBehaviour
             CurrentScore?.Invoke(CurrentNumberOfDeadCats, NumberOfDeadCatsToWin);
             if (CurrentNumberOfDeadCats >= NumberOfDeadCatsToWin)
             {
-                Debug.Log("Win");
-                GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.WinScreen);
-                //UiManager.WinScreen?.Invoke();
-                EndLevel?.Invoke();
+                StartCoroutine(DelayWinRoutine());
             }
         }
     }
+
+    
 
     private void UpdateSavedMice()
     {
@@ -97,14 +96,21 @@ public class LevelManager : MonoBehaviour
         {
             if (CurrentNumberOfSavedMice >= NumberOfSavedMiceToWin)
             {
-                Debug.Log("Win");
-                GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.WinScreen);
-                //UiManager.WinScreen?.Invoke();
-                EndLevel?.Invoke();
+                StartCoroutine(DelayWinRoutine());
             }
         }
-        
     }
+
+    IEnumerator DelayWinRoutine()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        Debug.Log("Win");
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.WinScreen);
+        
+        EndLevel?.Invoke();
+    }
+
+
 
     private void UpdateDeadMice()
     {
@@ -114,11 +120,17 @@ public class LevelManager : MonoBehaviour
 
         if (CurrentNumberOfDeadMice >= NumberOfDeadMiceToLoose)
         {
-            Debug.Log("Loose");
-            GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.LooseScreen);
-            //UiManager.LooseScreen?.Invoke();
-            EndLevel?.Invoke();
+            StartCoroutine(DelayLooseRoutine());
         }
+    }
+
+    IEnumerator DelayLooseRoutine()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        Debug.Log("Loose");
+        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.LooseScreen);
+        
+        EndLevel?.Invoke(); ;
     }
 
     private void UpdateSpawnedCats()
