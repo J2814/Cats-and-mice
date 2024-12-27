@@ -40,11 +40,13 @@ public class AdaptiveSpawner : Spawner
     private void OnEnable()
     {
         LevelManager.EndLevel += StopSpawning;
+        LevelManager.PreEndLevel += StopSpawning;
     }
 
     private void OnDisable()
     {
         LevelManager.EndLevel -= StopSpawning;
+        LevelManager.PreEndLevel -= StopSpawning;
     }
     void Start()
     {
@@ -52,10 +54,6 @@ public class AdaptiveSpawner : Spawner
         {
             StartCoroutine(StartUpDelay());
         }
-
-
-
-
 
         levelManager = FindObjectOfType<LevelManager>();
     }

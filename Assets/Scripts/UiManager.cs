@@ -31,41 +31,6 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         GameStateManager.CurrentGameState -= RespondToGameState;
     }
 
-    //private void Awake()
-    //{
-    //    if (instance != null)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //    else
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //}
-
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    Debug.Log(paused);
-        //    if (paused)
-        //    {
-        //        ResumeGame();
-        //        paused = false;
-        //    }
-        //    else
-        //    {
-        //        Pause();
-        //        paused = true;
-
-        //    }
-            
-
-            
-        //}
-    }
-
     public void RespondToGameState(GameStateManager.GameState gameState)
     {
 
@@ -216,6 +181,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     public void TimeScaleButtonToggle()
     {
         GameStateManager.instance.TimeScaleToggle();
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
     }
 
     public void LoadLevel(int buildIndex)

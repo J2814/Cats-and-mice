@@ -11,7 +11,20 @@ public class MovementController : MonoBehaviour
     public float MaxDistance = 0.1f;
 
     public bool AllowMovement = true;
-    
+    private void OnEnable()
+    {
+        LevelManager.PreEndLevel += StopMoving;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.PreEndLevel -= StopMoving;
+    }
+
+    private void StopMoving()
+    {
+        AllowMovement = false;
+    }
     private void Update()
     {
         UpdateMovement();

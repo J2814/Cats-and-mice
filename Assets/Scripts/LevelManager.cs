@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) PauseGame(); //Debug.Log("Pause");
+        if (Input.GetKeyDown(KeyCode.Space)) PauseGame(); //Debug.Log("Pause");
     }
     private void UpdateDeadCats()
     {
@@ -98,6 +98,7 @@ public class LevelManager : MonoBehaviour
         {
             if (CurrentNumberOfSavedMice >= NumberOfSavedMiceToWin)
             {
+                PreEndLevel?.Invoke();
                 StartCoroutine(DelayWinRoutine());
             }
         }
@@ -122,6 +123,7 @@ public class LevelManager : MonoBehaviour
 
         if (CurrentNumberOfDeadMice >= NumberOfDeadMiceToLoose)
         {
+            PreEndLevel?.Invoke();
             StartCoroutine(DelayLooseRoutine());
         }
     }

@@ -9,20 +9,14 @@ public class Unit : MonoBehaviour
 
     public float DeathTime = 0.7f;
 
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
-    }
+    
     void Start()
     {
         hitbox = GetComponent<Collider>();
         movementController = GetComponent<MovementController>();
     }
+
+    
 
     private void OnTriggerEnter(Collider collider)
     {

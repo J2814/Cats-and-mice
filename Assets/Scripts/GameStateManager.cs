@@ -10,6 +10,9 @@ public class GameStateManager : MonoBehaviour
 
     public float CurretPlayTimeScale = 1;
 
+    
+
+
     //public float 
     public enum GameState
     {
