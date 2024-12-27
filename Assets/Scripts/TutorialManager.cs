@@ -38,7 +38,7 @@ public class TutorialManager : MonoBehaviour
 
         step++;
 
-        if (step == 4)
+        if (step == 6)
         {
             tutorialTexts[step].gameObject.SetActive(true);
             StartCoroutine(DelayAndPunchAnim(1f));  
@@ -60,8 +60,8 @@ public class TutorialManager : MonoBehaviour
         AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.IntersectionSwitch);
         yield return new WaitForSeconds(delay);  
         
-        
-        StartCoroutine(DelayAndPunchAnim(1f));
+        if(step == 6)
+            StartCoroutine(DelayAndPunchAnim(1f));
     }
 
     private void ResumeGame()
