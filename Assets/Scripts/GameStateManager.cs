@@ -17,7 +17,7 @@ public class GameStateManager : MonoBehaviour
         Pause,
         MainMenu,
         WinScreen,
-        LooseScreen
+        LooseScreen,
     }
 
     public GameState MyGameState;
@@ -105,6 +105,8 @@ public class GameStateManager : MonoBehaviour
             TimeScaleChangeBy(0.5f);
             
         }
+
+        Debug.Log(Time.timeScale);
     }
 
     private void GameStateChange(GameState newGameState)

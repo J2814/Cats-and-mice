@@ -50,6 +50,8 @@ public class LevelSwitch : MonoBehaviour
 
         SceneManager.LoadScene(levels[currentLevelIndex]);
         AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+
+        GameStateManager.instance.ChangeGameState(GameStateManager.GameState.Gameplay);
     }
 
     public void SwitchLevel(int index)
@@ -58,6 +60,7 @@ public class LevelSwitch : MonoBehaviour
         {
             SceneManager.LoadScene(levels[index]);
             AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+            GameStateManager.instance.ChangeGameState(GameStateManager.GameState.Gameplay);
         }
     }
 
@@ -65,5 +68,6 @@ public class LevelSwitch : MonoBehaviour
     {
         SceneManager.LoadScene(levelName);
         AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+        GameStateManager.instance.ChangeGameState(GameStateManager.GameState.Gameplay);
     }
 }

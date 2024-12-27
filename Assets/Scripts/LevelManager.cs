@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
 
     public static Action Pause;
     public static Action EndLevel;
+    public static Action PreEndLevel;
 
     public static Action<int, int> CurrentScore;
 
@@ -80,6 +81,7 @@ public class LevelManager : MonoBehaviour
             CurrentScore?.Invoke(CurrentNumberOfDeadCats, NumberOfDeadCatsToWin);
             if (CurrentNumberOfDeadCats >= NumberOfDeadCatsToWin)
             {
+                PreEndLevel?.Invoke();
                 StartCoroutine(DelayWinRoutine());
             }
         }

@@ -8,6 +8,16 @@ public class Unit : MonoBehaviour
     private Collider hitbox;
 
     public float DeathTime = 0.7f;
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
     void Start()
     {
         hitbox = GetComponent<Collider>();
