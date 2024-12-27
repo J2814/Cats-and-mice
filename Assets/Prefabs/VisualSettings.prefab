@@ -51,3 +51,4 @@ MonoBehaviour:
   PathWidth: 0.2
   PathMaterial: {fileID: 2100000, guid: 96f98c355ef0dba469d58543193a8433, type: 2}
   IntersectionTextPunchScale: 1.05
+  IntersectionColorPunch: {r: 0, g: 0, b: 0, a: 0}
