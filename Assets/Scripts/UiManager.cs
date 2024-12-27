@@ -18,6 +18,8 @@ public class UiManager : MonoBehaviour, IGameStateResonder
 
     public GameObject MainMenuUi;
     public GameObject LevelSelectMenu;
+
+    bool paused = false;
     //public GameObject optionPanel;
     private void OnEnable()
     {
@@ -44,10 +46,24 @@ public class UiManager : MonoBehaviour, IGameStateResonder
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Debug.Log(paused);
+        //    if (paused)
+        //    {
+        //        ResumeGame();
+        //        paused = false;
+        //    }
+        //    else
+        //    {
+        //        Pause();
+        //        paused = true;
+
+        //    }
+            
+
+            
+        //}
     }
 
     public void RespondToGameState(GameStateManager.GameState gameState)
@@ -89,13 +105,14 @@ public class UiManager : MonoBehaviour, IGameStateResonder
         WinUi.SetActive(false);
         LooseUi.SetActive(false);
 
-        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Pause);
 
     }
     public void Gameplay()
     {
         GameplayUi.SetActive(true);
-        
+
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Resume);
         //MainMenuUi?.SetActive(false);
         PauseUi?.SetActive(false);
         WinUi.SetActive(false);
@@ -166,7 +183,7 @@ public class UiManager : MonoBehaviour, IGameStateResonder
     public void ResumeGame()
     {
         GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
-        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+        //AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
     }
 
     public void RestartLevel()

@@ -25,9 +25,9 @@ public class SoundBank : ScriptableObject
 
     public Sound GenericUi;
 
-    public Sound MainMenuMusic;
+    public Sound CageOpen;
 
-    public Sound GameplayMusic;
+    public Sound CageClose;
 
 
 }

@@ -40,6 +40,7 @@ public class Intersection : MonoBehaviour
                 KeyText.PunchAnim();
             }
 
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.IntersectionSwitch);
             availablePaths[currentPathIndex].GetComponent<PathVisualisation>().PunchWidth();
         }
     }

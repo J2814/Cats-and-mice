@@ -56,8 +56,11 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator DelayAndPunchAnim(float delay)
     {
+        tutorTxt.PunchAnim();
         yield return new WaitForSeconds(delay);  
-        tutorTxt.PunchAnim();  
+        
+        
+        StartCoroutine(DelayAndPunchAnim(1f));
     }
 
     private void ResumeGame()

@@ -94,7 +94,7 @@ public class FaceAnimator : MyAnimator
             ChangeAnimationState(DeathAnims[RandElement(DeathAnims)]);
         }
 
-        Vector3 scalePunch = new Vector3(transform.localScale.x * 1.5f, transform.localScale.x * 1.5f, transform.localScale.x * 1.5f);
+        Vector3 scalePunch = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z * 1.5f);
 
         transform.parent.transform.DOScale(scalePunch, 0.15f);
     }

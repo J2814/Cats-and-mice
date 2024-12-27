@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
     private bool LevelEnded = false;
 
 
-   
+    bool paused = false;
 
     private void OnEnable()
     {
@@ -148,6 +148,17 @@ public class LevelManager : MonoBehaviour
     {
         if (LevelEnded) return;
 
-        GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Pause);
+        if (paused)
+        {
+            GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Gameplay);
+            
+        }
+        else
+        {
+            GameStateManager.instance.ChangeGameState?.Invoke(GameStateManager.GameState.Pause);
+        }
+
+        paused = !paused;
+
     }
 }

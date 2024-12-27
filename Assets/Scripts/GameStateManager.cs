@@ -67,6 +67,7 @@ public class GameStateManager : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
+
         CurretPlayTimeScale += amount;
 
         if (CurretPlayTimeScale > 2f)
@@ -79,6 +80,16 @@ public class GameStateManager : MonoBehaviour
             CurretPlayTimeScale = 1;
         }
 
+        if (amount < 0)
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Pause);
+        }
+        else
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.Resume);
+        }
+
+
         Time.timeScale = CurretPlayTimeScale;
     }
 
@@ -87,10 +98,12 @@ public class GameStateManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             TimeScaleChangeBy(-0.5f);
+            
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             TimeScaleChangeBy(0.5f);
+            
         }
     }
 

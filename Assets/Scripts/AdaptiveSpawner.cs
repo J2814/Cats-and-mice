@@ -96,6 +96,7 @@ public class AdaptiveSpawner : Spawner
                 if (levelManager.CurrentSpawnedCats < MaxSpawnedUnits)
                 {
                     RandomSpawn();
+                    AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.CatSpawn);
                 }
             }
             else
@@ -103,6 +104,7 @@ public class AdaptiveSpawner : Spawner
                 if (levelManager.CurrentSpawnedMice < MaxSpawnedUnits)
                 {
                     RandomSpawn();
+                    AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.MouseSpawn);
                 }
             }
 

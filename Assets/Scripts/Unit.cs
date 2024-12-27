@@ -16,9 +16,17 @@ public class Unit : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        
         if (collider.CompareTag("DeathTrap"))
         {
             Die();
+
+            if (collider.gameObject.GetComponent<Cage>() != null)
+            {
+                collider.gameObject.GetComponent<Cage>().Close();
+
+                transform.position = collider.transform.position;
+            }
         }
 
         if (this.CompareTag("Mouse") && collider.CompareTag("Salvation"))
@@ -46,6 +54,17 @@ public class Unit : MonoBehaviour
         hitbox.enabled = false;
 
         GetComponentInChildren<FaceAnimator>().PlayDeathAnim();
+
+        if (this.gameObject.tag == "Cat")
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.CatDeath);
+        }
+        else
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.MouseDeath);
+        }
+        
+
 
         movementController.AllowMovement = false;
 
