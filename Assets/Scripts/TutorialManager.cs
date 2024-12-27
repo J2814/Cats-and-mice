@@ -57,6 +57,7 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator DelayAndPunchAnim(float delay)
     {
         tutorTxt.PunchAnim();
+        AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.IntersectionSwitch);
         yield return new WaitForSeconds(delay);  
         
         
