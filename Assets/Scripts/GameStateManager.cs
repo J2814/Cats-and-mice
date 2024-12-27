@@ -109,7 +109,7 @@ public class GameStateManager : MonoBehaviour
             
         }
 
-        Debug.Log(Time.timeScale);
+        
     }
 
     private void GameStateChange(GameState newGameState)

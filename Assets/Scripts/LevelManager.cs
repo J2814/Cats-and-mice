@@ -41,6 +41,7 @@ public class LevelManager : MonoBehaviour
 
 
     bool paused = false;
+    bool won = false;
 
     private void OnEnable()
     {
@@ -81,8 +82,12 @@ public class LevelManager : MonoBehaviour
             CurrentScore?.Invoke(CurrentNumberOfDeadCats, NumberOfDeadCatsToWin);
             if (CurrentNumberOfDeadCats >= NumberOfDeadCatsToWin)
             {
-                PreEndLevel?.Invoke();
-                StartCoroutine(DelayWinRoutine());
+                if (!won)
+                {
+                    PreEndLevel?.Invoke();
+                    StartCoroutine(DelayWinRoutine());
+                    won = true;
+                }
             }
         }
     }
@@ -98,8 +103,13 @@ public class LevelManager : MonoBehaviour
         {
             if (CurrentNumberOfSavedMice >= NumberOfSavedMiceToWin)
             {
-                PreEndLevel?.Invoke();
-                StartCoroutine(DelayWinRoutine());
+                if (!won)
+                {
+                    PreEndLevel?.Invoke();
+                    StartCoroutine(DelayWinRoutine());
+                    won = true;
+                }
+                
             }
         }
     }

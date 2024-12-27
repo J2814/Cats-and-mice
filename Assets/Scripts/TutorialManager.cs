@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,13 +29,22 @@ public class TutorialManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return)) 
         {
             ShowNextStep();
+            AudioManager.instance.PlaySound(AudioManager.instance.SoundBank.GenericUi);
+
+            enterText.gameObject.transform.DOScale(new Vector3(3, 3, 3), 0);
+            enterText.gameObject.transform.DOPunchScale(new Vector3(1.5f, 1.5f, 1.5f), 0.15f);
+
         }
     }
 
 
     private void ShowNextStep()
     {
-        tutorialTexts[step].gameObject.SetActive(false);
+        if (tutorialTexts.Length > step)
+        {
+            tutorialTexts[step].gameObject.SetActive(false);
+        }
+        
 
         step++;
 
